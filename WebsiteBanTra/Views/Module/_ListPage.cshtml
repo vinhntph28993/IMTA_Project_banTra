@@ -1,0 +1,8 @@
+﻿@model IEnumerable<WebsiteBanTraiCay.Models.MPost>
+
+@foreach (var k in Model)
+{
+
+    <a href="~/@k.Slug" class="ll text-decoration-none text-dark" style="display:flex; align-items:center ">  <span class="">@k.Title</span></a>
+
+}    

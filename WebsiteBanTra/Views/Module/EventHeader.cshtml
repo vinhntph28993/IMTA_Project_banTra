@@ -1,0 +1,21 @@
+﻿@model IEnumerable<WebsiteBanTraiCay.Models.MEvent>
+
+<div class="header__top-bar__left">
+    @if (Model.Count() != 0)
+    {
+        foreach (var events in ViewBag.Eventnews)
+        {
+            <a href="~/@events.URL" class="top-bar__left__title" style="margin-bottom: 0">
+               @events.Name
+            </a>
+
+        }
+    }
+    else
+    {
+        <a href="#" class="top-bar__left__title" style="margin-bottom: 0">
+            Hiện chưa có chương trình KM
+        </a>
+    }
+
+</div>

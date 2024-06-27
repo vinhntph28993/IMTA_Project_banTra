@@ -1,0 +1,334 @@
+﻿<style>
+    .dropdown-item:hover {
+        background: #ebebeb
+    }
+
+    #navbarDropdown:hover {
+        text-decoration: none;
+        color: #cc2121
+    }
+    .btnloginform {
+        padding: 8px 18px;
+        color: white;
+        background: #cc2121;
+        border: 2px solid white;
+        border-radius: 25px;
+        margin-top: 5px;
+    }
+    .btnloginform:hover {
+        background: white;
+        transition: .3s;
+        color: #cc2121
+    }
+
+
+</style>
+@if (Session["User_Name"] == null)
+{
+    <button type="button" style="border: none; background: white" data-toggle="modal" data-target=".bd-example-modal-lg"
+            data-whatever="getbootstrap" data-backdrop="static" data-keyboard="false">
+        <i class="fa-solid fa-user"></i>
+    </button>
+    <!--<button type="button" class="button_dangky" data-toggle="modal" data-target="#examplePig">
+        <a href=""> Đăng ký thành viên</a>
+    </button>
+    -->
+    <button type="button" class="button_dangky" data-toggle="modal" data-target="#exampleModal" data-backdrop="static"
+            data-keyboard="false">
+    </button>
+}
+else
+{
+    <div class="dropdown" style="font-size: 14px ">
+        <span style="color: #111">Xin chào, </span>
+        <a class="font-weight-bold dropdown-toggle" style="color: #111" href="~/account/profile" id="navbarDropdown" role="button"
+           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            @Session["User_Name"]
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="font-size: 15px; color: #111">
+
+            @*<a class="dropdown-item border-bottom mb-1" href="admin/">
+                    <i class="fas fa-caret-right text-secondary"></i>&nbsp
+                    Trang
+                    quản trị
+                </a>*@
+
+
+            <a class="dropdown-item border-bottom my-1" href="~/account/order">
+                <i class="fas fa-caret-right text-secondary"></i>&nbsp Đơn hàng
+            </a> 
+            <a class="dropdown-item" href="~/account/userlogout?url=@(HttpContext.Current.Request.Url.AbsolutePath)"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+        </div>
+    </div>
+}
+
+
+
+@**@
+
+
+
+<!-- Modal Register-->
+<div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document" style="min-width:720px;">
+        <div class="modal-content">
+            
+            <div class="modal-body p-0">
+                <div class="row " style="margin: 0">
+                    <div class="col-6 w-100 p-0" style="height: 653px; background: #cc2121 ">
+                        <div class="w-100 text-light font-weight-bold" style="margin: 200px auto; text-align: center" >
+                            <p style="font-size: 30px">Xin chào!</p>
+                            <p style="padding: 0 20px">Đăng nhập tài khoản để trải nghiệm dịch vụ tốt nhất từ Floda!</p>
+                            <button data-toggle="modal" data-target=".bd-example-modal-lg" data-dismiss="modal" class=" btnloginform" 
+                                    >ĐĂNG NHẬP</button>
+                        </div>
+                       
+                    </div>
+                    <div class="col-6" style="padding-top: 15px">
+                        <h5 class="modal-title text-center font-weight-bold" id="exampleModalLabel">
+                            ĐĂNG KÝ
+                        </h5>
+                        <form method="POST">
+                            <div class="form-row">
+                                <div class="col-md-12 mb-2">
+                                    <label class=" mini-s-c font-weight-bold">Họ và tên *</label>
+                                    <input type="text" class="form-control ten" placeholder="" value="" required
+                                           name="ten" id="FullName">
+                                    <div class="invalid-feedback">
+                                        Họ và tên không được để trống
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-12 mb-2">
+                                    <label class=" mini-s-c  font-weight-bold">Tên truy cập *</label>
+                                    <input type="text" class="form-control ten" placeholder="" value="" required
+                                           name="ten" id="Name">
+                                    <div class="invalid-feedback">
+                                        Tên truy cập không được trống
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-12 mb-2">
+                                    <label class=" mini-s-c  font-weight-bold">Email *</label>
+                                    <input type="email" class="form-control email" placeholder="" value="" required
+                                           name="EmailID" id="EmailID">
+                                    <div class="invalid-feedback">
+                                        Email không được để trống
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-12 mb-2">
+                                    <label class=" mini-s-c  font-weight-bold">Nhập lại Email *</label>
+                                    <input type="email" class="form-control email" placeholder="" value="" required
+                                           name="Email" id="Email">
+                                    <div class="invalid-feedback">
+                                        Email không được để trống
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-12 mb-2">
+                                    <label class=" mini-s-c  font-weight-bold">Địa chỉ *</label>
+                                    <input type="text" class="form-control address" placeholder="" value="" required
+                                           name="Address" id="Address">
+                                    <div class="invalid-feedback">
+                                        Địa chỉ không được để trống
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-12 mb-2">
+                                    <label class=" mini-s-c font-weight-bold">Số điện thoại *</label>
+                                    <input type="number" class="form-control valiphone Phone8" id="valiphone"
+                                           placeholder="" required name="phone">
+                                    <div class="invalid-feedback invalid-feedback-valiphone">
+                                        Số điện thoại đã được đăng ký
+                                    </div>
+                                </div>
+                                <div class="col-md-12 mb-2">
+                                    <label class="mini-s-c   font-weight-bold">Mật khẩu *</label>
+                                    <input type="password" class="form-control pass-res" placeholder="" required
+                                           name="pass" id="Pass">
+                                </div>
+                                <div class="col-md-12 mb-2">
+                                    <label class="mini-s-c  font-weight-bold">Xác nhận lại mật khẩu *</label>
+                                    <input type="password" class="form-control pl-2  repass-res" placeholder=""
+                                           required name="RePass" id="RePass">
+                                    <div class="invalid-feedback">
+                                        <!--is-invalid-->
+                                        Mật khẩu không khớp. Hãy thử lại.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck3"
+                                           required checked>
+                                    <label class="form-check-label mini-s-c" for="invalidCheck3">
+                                        Tôi đồng ý với các điều khoản dịch vụ
+                                    </label>
+                                </div>
+                            </div>
+
+                            <button class=" mini-s-c float-right text-light font-weight-bold" id="btn_register" type="submit" style="background: #cc2121; border: none; border-radius: 5px; padding: 8px 18px">
+                                ĐĂNG KÝ
+                            </button>
+                            <button type="button" class="  btn btn-dark float-right mr-2 font-weight-bold"
+                                    data-dismiss="modal" style="border-radius: 5px; padding: 7px 18px; font-size: 12px">
+                                Thoát
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+            <hr />
+            <div class="row clearfix mx-4 mt-1 mb-3">
+                <div class="col-6" style="color:#4a90e2; font-size: 12px;">
+                    <button data-toggle="modal" data-target=".bd-example-modal-lg" data-whatever="getbootstrap" class="dn-lg text-primary"
+                            style="border:0; background:#fff">
+                        Đăng nhập
+                    </button>
+                    | <a href="forgotpassword">Quên mật khẩu </a>
+                </div>
+                <div class="col-4"></div>
+                <div class="col-2" style="margin-top:-10px">
+                    <button type="button" class=" btn btn-secondary" data-dismiss="modal">
+                        Thoát
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('#btn_register').click(function (e) {
+        e.preventDefault();
+        @*alert("OK")*@
+        $.ajax({
+            url: "account/register",
+            type: "POST",
+            data: {
+                user: {
+                    Email: $('#Email').val(),
+                    EmailID: $('#EmailID').val(),
+                    Address: $('#Address').val(),
+                    FullName: $('#FullName').val(),
+                    Name: $('#Name').val(),// dùng tạm, sau xóa luôn cột này đi
+                    Password: $('#Pass').val(),
+                    Phone: $('.Phone8').val(),
+                },
+                RePass: $('#RePass').val()
+            },
+            dataType: 'json',
+            success: function (data) {
+                if (data.Code == 0) {
+                    $('#exampleModal').modal("hide")
+                    swal({
+                        icon: "success",
+                        title: data.Message,
+                        timer: 5000
+                    });
+                    return;
+                } else if(data.Code == 1) {
+                    swal({
+                        icon: "warning",
+                        title: data.Message,
+                        timer: 5000
+                    });
+                    return;
+                }
+                swal({
+                    icon: "warning",
+                    title: data.Message,
+                    timer: 5000
+                });
+            }
+        })
+    })
+</script>
+
+
+<!-- Modal Login-->
+<div class="modal fade bd-example-modal-lg" id="exampleModal1" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content " style="border: none !important; overflow: hidden">
+            @*<div class="modal-header" style="background:#cc2121">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    ĐĂNG NHẬP
+                </h5>
+                <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>*@
+            <div class="row " style="margin: 0">
+                    <div class="col-6 w-100 p-0" style=" background: #cc2121">
+                        <div class="w-100 text-light font-weight-bold" style="margin: 100px auto; text-align: center">
+                            <p style="font-size: 30px">Xin chào!</p>
+                            <p style="padding: 0 20px">Đăng ký tài khoản để trải nghiệm dịch vụ tốt nhất từ Floda!</p>
+                            <button data-toggle="modal" data-target="#exampleModal" data-dismiss="modal" class=" btnloginform">
+                                ĐĂNG KÝ
+                            </button>
+                        </div>
+
+                    </div>
+                <div class="col-6" style="padding-top: 15px">
+                    <h5 class="modal-title text-center font-weight-bold" id="exampleModalLabel">
+                        ĐĂNG NHẬP
+                    </h5>
+                    <div class="py-3">
+                        <form method="POST" class="shop">
+                            <div class="form-group">
+                                <label class="font-weight-bold" style="font-size: 13px;">Email *</label>
+                                <input type="text" class="form-control" aria-describedby="emailHelp"
+                                       placeholder="" name="Name" value="">
+                                <small id="nameHelp" class="pl-1 form-text text-danger"></small>
+                            </div>
+                            <div class="form-group">
+                                <label class="font-weight-bold" style="font-size: 13px;">Mật khẩu *</label>
+                                <input type="password" class="form-control" placeholder="" name="Password" value="">
+                                <small id="passHelp" class="pl-1 form-text text-danger"></small>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-6">
+                                    <div class="form-check ">
+                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                        <label class="form-check-label" style="font-size: 13px;">
+                                            Lưu mật khẩu
+                                        </label>
+                                    </div>
+                                </div>
+                                 
+                            </div>
+                            <div class="row" style="color:#4a90e2; font-size: 12px;">
+                                
+                                <div class="col-12 mt-4"     >
+                                    <button id="btn_login_c" class="text-uppercase text-light float-right mb-3 " style="background: #cc2121; border: none; padding: 8px 18px; border-radius: 5px">
+                                        Đăng nhập
+                                    </button>
+                                    <button type="button" class=" btn btn-dark float-right mr-2 font-weight-bold"
+                                            data-dismiss="modal" style="border-radius: 5px; font-size: 12px; padding: 7px 18px ">
+                                        Thoát
+                                    </button>
+
+                                </div>
+                               
+                            </div>
+                        </form>
+                    </div>
+                 
+                 
+                </div>
+
+            </div>
+          
+        </div>
+    </div>
+</div>
+

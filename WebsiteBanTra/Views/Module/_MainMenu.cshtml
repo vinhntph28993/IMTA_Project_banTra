@@ -1,0 +1,7 @@
+﻿@model IEnumerable<WebsiteBanTraiCay.Models.MMenu>
+<li class="header__main__nav__item"><a class="header__main__nav_link" href="~/post">TIN TỨC</a> </li>
+@foreach (var t in Model)
+{
+
+    <li class="header__main__nav__item"><a class="header__main__nav_link" href="~/@t.Link">@t.Name</a> </li>
+}

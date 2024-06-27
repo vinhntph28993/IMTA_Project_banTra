@@ -1,0 +1,252 @@
+﻿@model IEnumerable<WebsiteBanTraiCay.Models.MCategory>
+<head>
+    <link rel="stylesheet" href="~/Public/css/styleHeader.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   
+</head>
+<header>
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/@ViewBag.APITalkTo.APITalkTo';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+
+    @*<div class="" style="background:rgb(29, 113, 171)">
+            <div class="container-91 text-right">
+                <small>
+                    @Html.Action("MainMenu", "Module")
+                </small>
+            </div>
+        </div>*@
+
+    <div id="header">
+        <div class="header__wrapper">
+            <div id="header__top-bar" class="header__top-bar ">
+                <div class="container">
+                    @Html.Action("EventHeader", "Module")
+                    <div class="header__top-bar__right">
+                        <ul class="header__right__list" style="margin-bottom: 0">
+                            <li class="header__right__language">
+                                <a href="tracking">
+                                    Theo dõi đơn hàng
+                                </a>
+                            </li>
+                            <li class="header__right__language">
+                                <a href="forgotpassword">
+                                    Tìm lại mật khẩu
+                                </a>
+                                @*<i class="fa-solid fa-chevron-down"></i>
+            <div class="right__language__current-dropdown">
+                <p>You need Polylang or WPML plugin for this to work. You can remove it from Theme Options.</p>
+            </div>*@
+                            </li>
+                            <li class="header__right__divider"></li>
+                            <li class="header__right__social">
+                                <i class="fa-brands fa-facebook-f"></i>
+                                <i class="fa-brands fa-instagram"></i>
+                                <i class="fa-brands fa-twitter"></i>
+                            </li>
+
+                            @*<li class="header__right__divider"></li>
+                            <li class="header__right__language">
+                                <a href="#">
+                                    Language
+
+                                </a>
+                                <i class="fa-solid fa-chevron-down"></i>
+                                <div class="right__language__current-dropdown">
+                                    <p>You need Polylang or WPML plugin for this to work. You can remove it from Theme Options.</p>
+                                </div>
+                            </li>*@
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <div class="header__main">
+                <div class="container">
+                    <div class="header__main__logo">
+                        <a href="/">
+                            <img src="~/Public/images/iconweb/@ViewBag.configs.LogoWeb" alt="@ViewBag.configs.Name" width="90" height="27">
+                        </a>
+                    </div>
+                    <div class="header__main__nav">
+                        <ul class="header__main__nav__list">
+                            <li class="header__main__nav__item"> <a class="header__main__nav_link" href="/">TRANG CHỦ</a></li>
+                            <li class="header__main__nav__item"><a class="header__main__nav_link" href="about">GIỚI THIỆU</a> </li>
+                            <li class="header__main__nav__item">
+                                <a class="header__main__nav_link" href="~/product">
+                                    CỬA HÀNG
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </a>
+                                <div class="main__nav__item__current-dropdown">
+                                    <ul class="current-dropdown__list">
+                                        <li class="current-dropdown__item">
+
+                                            <a class="current-dropdown__link" href="~/product">Tất cả sản phẩm</a>
+                                        </li>
+
+                                        @{int i = 1; }
+                                        @foreach (var c in Model@*.Take(12)*@)
+    {
+        if (c.ParentID == 0)
+        {
+                        <li class="current-dropdown__item">
+
+                            <a class="current-dropdown__link" href="~/@c.Slug">@c.Name</a>
+                            @*<ul class="current-dropdown__list-nav">
+
+            @foreach (var d in Model)
+            {
+                if (c.ID == d.ParentID)
+                {
+
+                    <li class="">
+                        <a href="~/@d.Slug" class="current-dropdown__link">@d.Name</a>
+                    </li>
+                }
+            }
+        </ul>*@
+                        </li>
+                    }
+                    i++;
+                }
+                                    </ul>
+                                    <div class="">
+                                        @foreach (var t in ViewBag.Promotion)
+                                        {
+                                            <div class="promo float-left"> <a href="@t.Slug" class="text-dark text-decoration-none">@t.Title</a> </div>
+                                        }
+
+                                    </div>
+                                </div>
+                            </li>
+
+                            @Html.Action("MainMenu", "Module")
+                            <li class="header__main__nav__item"><a class="header__main__nav_link" href="@Url.Action("Contact","Site")">LIÊN HỆ</a> </li>
+                        </ul>
+                    </div>
+                    <div class="header__main__nav-right">
+                        <ul class="header__main__nav-right__list">
+                            <li class="main__nav-right__item">
+                                <a class="main__nav-right__item__link" href="">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </a>
+                                <div class="main__nav__item-search">
+                                    @using (Html.BeginForm("Search", "Site", FormMethod.Get, new { @class = "form-search-top" }))
+                                    {
+                                        <div class="main__nav__item-box-search">
+
+                                            <input type="text" name="key" id="" value="@(Session["keywords"] ?? "")" placeholder="Tìm kiếm...">
+                                            <button type="submit">
+                                                <i class="fa-solid fa-magnifying-glass"></i>
+                                            </button>
+
+
+                                        </div>
+                                    }
+                                </div>
+                            </li>
+
+                            <li class="main__nav-right__item  main__nav-right__item__link-user">
+                                <p class="main__nav-right__item__link">
+                                    @Html.Action("Login", "Module")
+
+                                </p>
+
+                            </li>
+                            <li class="main__nav-right__item">
+                                <a class="main__nav-right__item__link " href="~/cart">
+
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                    <div class="main__nav-right__item-cart">
+                                        <div class="main__nav-right__item-cart-count">
+                                            <span class="count-cart slc">
+                                                @(Session["Cart"] != null ? ((List<WebsiteBanTraiCay.Library.ModelCart>)Session["Cart"]).Count() : 0)
+                                            </span>
+
+                                        </div>
+                                    </div>
+                                </a>
+                                <div class=" list-cart">
+
+                                    @if (Session["Cart"] != null)
+                                    {
+                                        <div class="cart-box">
+                                            @{double Tong = 0;}
+                                            @foreach (var c in (List<WebsiteBanTraiCay.Library.ModelCart>)Session["Cart"])
+                                            {
+                                                Tong += (c.Price * c.Quantity);
+
+
+                                                <div class="cart-box-item">
+                                                    <a class="cart-box-item-img-link" href="~/@c.Slug">
+                                                        <img class="cart-box-item-img" src="~/Public/images/products/@c.Image" alt="@c.Name">
+                                                    </a>
+                                                    <div class="cart-box-item-info">
+                                                        <div class="cart-box-item-name">
+                                                            <a class="cart-box-item-name-link" href="~/@c.Slug">@c.Name</a>
+                                                        </div>
+                                                        <div class="cart-box-item-quantity-price">
+                                                            <span class="cart-box-item-price">@c.Price.ToString("N0") ₫</span>
+                                                            <span> x</span>
+                                                            <div class="quantity-product">
+                                                                <span class="cart-box-item-quantity">@c.Quantity</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="remove-cart">
+                                                        <a href="javascript:void(0)" data-toggle="tooltip" data-placement="right" class="m-remove-one"
+                                                           data-id="@c.ProductID" title="Xóa khỏi giỏ hàng">
+                                                            <i class="fa-solid fa-x"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                            }
+                                        </div>
+
+                                        <div class="total-price-box">
+                                            <span>Tạm tính:</span>
+                                            @Tong.ToString("N0")₫
+                                            <div class="total-price"> </div>
+                                        </div>
+
+                                        <div class="btn-cart-box-buy">
+                                            <a class="btn-cart-link-buy" href="~/cart">THANH TOÁN</a>
+
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="t text-center">
+                                            <img src="~/Public/images/null.png" alt="Trống" width="100">
+                                            <div class="pb-5 font-weight-bold " style="opacity: .6;">
+                                                Giỏ hàng của bạn trống
+                                            </div>
+                                        </div>
+                                    }
+
+                                </div>
+
+
+
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</header>
+

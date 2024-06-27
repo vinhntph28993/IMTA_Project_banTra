@@ -1,0 +1,57 @@
+﻿<script src="~/Public/js/target.min.js"></script>
+@if (Session["Cart"] != null)
+{
+    <div class="cart-box">
+        @{double Tong = 0;}
+        @foreach (var c in (List<WebsiteBanTraiCay.Library.ModelCart>)Session["Cart"])
+        {
+            Tong += (c.Price * c.Quantity);
+
+
+            <div class="cart-box-item">
+                <a class="cart-box-item-img-link" href="~/@c.Slug">
+                    <img class="cart-box-item-img" src="~/Public/images/products/@c.Image" alt="@c.Name">
+                </a>
+                <div class="cart-box-item-info">
+                    <div class="cart-box-item-name">
+                        <a class="cart-box-item-name-link" href="~/@c.Slug">@c.Name</a>
+                    </div>
+                    <div class="cart-box-item-quantity-price">
+                        <span class="cart-box-item-price">@c.Price.ToString("N0") ₫</span>
+                        <span> x</span>
+                        <div class="quantity-product">
+                            <span class="cart-box-item-quantity">@c.Quantity</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="remove-cart">
+                    <a href="javascript:void(0)" data-toggle="tooltip" data-placement="right" class="m-remove-one"
+                       data-id="@c.ProductID" title="Xóa khỏi giỏ hàng">
+                        <i class="fa-solid fa-x"></i>
+                    </a>
+                </div>
+            </div>
+
+        }
+    </div>
+
+    <div class="total-price-box">
+        <span>Tạm tính:</span>
+        @Tong.ToString("N0")₫
+        <div class="total-price"> </div>
+    </div>
+
+    <div class="btn-cart-box-buy">
+        <a class="btn-cart-link-buy" href="~/cart">THANH TOÁN</a>
+
+    </div>
+}
+else
+{
+    <div class="t text-center">
+        <img src="~/Public/images/null.png" alt="Trống" width="100">
+        <div class="pb-5 font-weight-bold " style="opacity: .6;">
+            Giỏ hàng của bạn trống
+        </div>
+    </div>
+}
