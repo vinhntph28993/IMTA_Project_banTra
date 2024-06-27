@@ -1,0 +1,58 @@
+﻿
+<!DOCTYPE HTML>
+<HTML lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    @Html.Action("ConfigHead", "Module")  
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/Public/css/bootstrap.min.css">
+    <!-- owl -->
+    <link rel="stylesheet" href="~/Public/css/owl.carousel.css">
+    <link rel="stylesheet" href="~/Public/css/all.min.css">
+    <link rel="stylesheet" href="~/Public/css/imageSprite.css" />
+    <script src="~/Public/js/sweetalert2@9.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link href="~/Public/css/stylee.css" rel="stylesheet" />
+
+    @*<link href="~/Public/css/styleshop.css" rel="stylesheet" />*@
+    <script src="~/Public/js/jquery-3.5.1.js"></script>
+    <script src="~/Public/js/SomeeAdsRemover.js"></script>
+
+
+</head>
+
+<body>
+
+
+    @Html.Action("Header", "Module")
+
+    @RenderBody()
+    <hr />
+    
+    @Html.Action("Footer", "Module")
+
+    <div style="background:#f3f3f3">
+        <div class="copyright container-91">
+            Created by Coder
+        </div>
+    </div>
+
+    <div id="bttop" style="display: none; align-items: center; width: 50px; height: 50px; border-radius: 50%; border: 1px solid black">
+        <div style=" width: 100%; height: 100%; display: flex; justify-content: center; align-items: center">
+            <i class="fa-solid fa-chevron-up" style="transform: rotate(90deg); font-size: 20px"></i>
+        </div>
+    </div>
+
+    @Html.Action("ConfigAnalytic", "Module")
+    <!-- owl -->
+    <script src="~/Public/js/owl.carousel.js"></script>
+    <script src="~/Public/js/qrcode.min.js"></script>
+    <script src="~/Public/js/popper.min.js"></script>
+    <script src="~/Public/js/bootstrap.min.js"></script>
+    <script src="~/Public/js/target.min.js"></script>
+
+
+</body>
+
+</HTML>
