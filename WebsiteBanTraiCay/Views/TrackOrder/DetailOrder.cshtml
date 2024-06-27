@@ -1,0 +1,579 @@
+﻿@model IEnumerable<WebsiteBanTraiCay.Models.MOrderDetail>
+@{
+    ViewBag.Title = "Chi tiết đơn hàng";
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+<div class="breadcrumb-c clearfix d-block">
+    <ul class="container-91">
+        <li><a href="/">Trang chủ </a></li>
+        <li class="dsfsd"><a href="#"> Thông tin đơn hàng</a></li>
+    </ul>
+</div>
+<div class="box-content">
+    <div class="container">
+        <div class="box-container">
+            @foreach (var i in Model)
+            {
+                <div class="info-cart">
+                    <div class="info-user" id="form-pay">
+
+                        <h2>CHI TIẾT ĐƠN HÀNG!</h2>
+                        <h4>THÔNG TIN KHÁCH HÀNG</h4>
+                        <div class=" form-group fullname">
+
+                            <label style="margin: 0" for="fullname">Khách hàng</label>
+                            <span>
+                                @ViewBag.Order.DeliveryName
+                            </span>
+
+                        </div>
+                        <div class="phone form-group">
+                            <label style="margin: 0" for="sdt">Số điện thoại</label>
+
+                            <span>
+                                @ViewBag.Order.DeliveryPhone
+                            </span>
+                        </div>
+                        <div class="email form-group">
+                            <label style="margin: 0" for="Email">Email</label>
+                            <span>
+                                @ViewBag.Order.DeliveryEmail
+
+                            </span>
+                        </div>
+                        <div class="address form-group">
+                            <label style="margin: 0" for="addRess">Địa chỉ</label>
+                            <span>
+                                @ViewBag.Order.DeliveryAddress
+
+                            </span>
+                        </div>
+
+
+                        <div class="pay-method form-group">
+                            <label style="margin: 0" for="pay-method">Phương thức thanh toán</label>
+                            @if (ViewBag.Order.Status == 0)
+                            {
+                                <span style="color:red" class="text-right mr-3 d-block">
+                                    Đã hủy
+                                </span>
+                            }
+                            else
+                            {
+                                if (ViewBag.Order.IsPayment == true)
+                                {
+                                    <span>
+                                        Đã thanh toán
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span>
+                                        Thanh toán khi nhận hàng
+                                    </span>
+                                }
+                            }
+                        </div>
+                        <div class="note form-group">
+                            <label style="margin: 0" for="note">Ghi chú đơn hàng</label>
+                            <span></span>
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="info-product-boder">
+
+                    </div>
+                    <div class="info-product-buy" id="form-info-pay">
+
+                        <div class="info-product">
+                            <div class="info-product-title">
+                                <h3 class="info-order-title">
+                                    Đơn hàng của bạn đã được xác nhận.
+                                </h3>
+                            </div>
+                            @{double Tong = 0; }
+                            @foreach (var t in Model)
+                            {
+                                foreach (var p in ViewBag.productOrder)
+                                {
+                                    if (p.ID == t.ProductID)
+                                    {
+                                        Tong += t.Amount;
+
+                                        <ul class="info-product-list">
+                                            <li class="li-order-number">Mã đơn hàng: <span>@i.OrderID</span></li>
+                                            <li>
+                                                <ul class="li-product-list">
+                                                    <li class="li-product-title">
+                                                        Sản phẩm:
+                                                        <a href="~/@p.Slug" style="display: inline-block"> <span>@p.Name</span></a> x <span>@t.Quantity</span>
+                                                    </li>
+
+                                                </ul>
+                                            </li>
+
+
+                                            <li class="li-delivery">Giao nhận hàng: <span>Miễn phí vận chuyển</span></li>
+                                            <li class="li-total">Tổng cộng: <span class="span-total">@String.Format("{0:0,0₫}", Tong)</span></li>
+                                            <li class="li-quantity" style="display: flex">
+                                                Trạng thái đơn hàng: <span style="margin-left: 6px">
+                                                    <div id="id_qrcode"></div>
+                                                    @if (ViewBag.Order.Status == 1)
+                                                    {
+                                                        <span class="text-dark text-right d-block pr-5">
+                                                            Đang xử lý
+                                                        </span>
+                                                    }
+                                                    else if (ViewBag.Order.Status == 2)
+                                                    {
+                                                        <span class="text-dark text-right d-block pr-5">
+                                                            Đang giao hàng
+                                                        </span>
+                                                    }
+                                                    else if (ViewBag.Order.Status == 3)
+                                                    {
+                                                        <span class="text-dark text-right d-block pr-5">
+                                                            Đã giao hàng
+                                                        </span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="text-dark text-right d-block pr-5">
+                                                            Đã hủy
+                                                        </span>
+                                                    }
+                                                </span>
+                                            </li>
+                                            <li class="li-pay-method">
+                                                Phương thức thanh toán:
+                                                @if (ViewBag.Order.Status == 0)
+                                                {
+                                                    <span style="color:red" class="text-right mr-3 d-block">
+                                                        Đã hủy
+                                                    </span>
+                                                }
+                                                else
+                                                {
+                                                    if (ViewBag.Order.IsPayment == true)
+                                                    {
+                                                        <span>
+                                                            TT khi nhận hàng
+                                                        </span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span>
+                                                            Đã TT MOMO
+                                                        </span>
+                                                    }
+                                                }
+                                            </li>
+                                        </ul>
+
+                                    }
+                                }
+                            }
+                        </div>
+
+                    </div>
+                </div>
+            }
+            
+        </div>
+
+
+
+    </div>
+   
+</div>
+
+
+
+<script type="text/javascript">
+    function onReady() {
+        var elText = document.getElementById("textqr").value;
+        var qrcode = new QRCode("id_qrcode", {
+            text: elText.toString(),
+            width: 150,
+            height: 150,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+        });
+    }
+</script>
+<style>
+    #listtab-order .active {
+        border-bottom: 3px solid #ee4d2d;
+        background: #fff;
+        color: #ee4d2d;
+        border-top: 0;
+        border-left: 0;
+        border-right: 0;
+    }
+
+    .list-group-item {
+        border-bottom: 1px solid #eee;
+        border-top: 0;
+        border-left: 0;
+        border-right: 0;
+    }
+
+    .border-m {
+        height: .1875rem;
+        width: 100%;
+        background-position-x: -1.875rem;
+        background-size: 7.25rem .1875rem;
+        background-image: repeating-linear-gradient(45deg,#6fa6d6,#6fa6d6 33px,transparent 0,transparent 41px,#f18d9b 0,#f18d9b 74px,transparent 0,transparent 82px);
+    }
+
+    .vertical-center {
+        margin: 0 auto;
+        position: absolute;
+        top: 50%;
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+
+
+
+    :root {
+        --primary-color: #cc2121;
+    }
+
+    .box-content {
+        width: 100%;
+        margin: 40px 0 80px 0;
+    }
+
+    .info-cart {
+        width: 100%;
+        display: flex;
+    }
+
+    #form-pay span {
+        font-size: 14px;
+        color: #666;
+    }
+
+    .info-user {
+        width: 58%;
+        height: 100%;
+    }
+
+        .info-user h2 {
+            padding: 0 0 15px 0;
+            color: var(--primary-color);
+        }
+
+        .info-user h4 {
+            padding: 10px 0 22px 0;
+            color: #1c1c1c;
+            border-bottom: 2px solid #ddd;
+        }
+
+
+
+    .box-container {
+        width: 100%;
+    }
+
+    .login-title, .discount-title {
+        padding-bottom: 10px;
+        font-size: 16px;
+        color: #111;
+    }
+
+    .fullname {
+        display: flex;
+        justify-content: space-between;
+    }
+
+        .fullname label, .select-nation label,
+        .address label, .pay-method label, .city label, .phone label, .email label, .note label {
+            display: block;
+            color: #222;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+    .select-nation, .fullname, .note, .address, .city, .phone, .email, .pay-method {
+        border-bottom: 1px solid #ddd;
+        display: flex;
+        align-items: center;
+    }
+
+
+
+    .first-name {
+        margin-right: 27px;
+        margin-bottom: 8px;
+    }
+
+    .last-name {
+        margin-bottom: 8px;
+    }
+
+        .first-name input, .last-name input {
+            width: 320px;
+            height: 39px;
+            outline: none;
+            border: 1px solid #ccc;
+            padding-left: 8px;
+            box-shadow: 0 0 2px #ccc;
+        }
+
+    .address input, .city input, .phone input, .email input {
+        width: 100%;
+        height: 39px;
+        outline: none;
+        border: 1px solid #ccc;
+        padding-left: 8px;
+        box-shadow: 0 0 2px #ccc;
+    }
+
+        .first-name input:focus, .last-name input:focus, .select-nation select:focus, .address input:focus, .city input:focus, .phone input:focus, .email input:focus, .note #text-note:focus {
+            box-shadow: 0 0 5px #ccc;
+        }
+
+    .select-nation select {
+        width: 100%;
+        padding: 10px;
+        font-size: 15px;
+        color: #444;
+        border: 1px solid #ccc;
+        outline: none;
+    }
+
+        .select-nation select option {
+            padding: 10px;
+        }
+
+    .note #text-note {
+        padding: 15px;
+    }
+
+    .note #text-note {
+        max-width: 100%;
+        outline: none;
+        border: 1px solid #ccc;
+        padding-left: 8px;
+        box-shadow: 0 0 2px #ccc;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .info-product-boder {
+        width: 2%;
+    }
+
+    .info-product-buy {
+        width: 40%;
+        padding: 30px;
+        background-color: rgba(0,0,0,0.02);
+        box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 20%), 0 1px 0 rgb(0 0 0 / 7%), inset 0 0 0 1px rgb(0 0 0 / 5%);
+    }
+
+    .product-pay, .product-box, .provisional, .delivery, .total {
+        display: flex;
+        justify-content: space-between;
+    }
+
+
+
+    .product-box, .provisional, .delivery {
+        border-bottom: 1px solid #ebebeb;
+    }
+
+
+
+    .product-pay {
+        padding: 7px 0;
+        letter-spacing: .5px;
+        font-weight: 550;
+        font-size: 14px;
+    }
+
+    .product-box {
+        width: 100%;
+        padding: 10px 0;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .product-box2 {
+        width: 100%;
+        padding: 5px 0;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .product-box .product-name {
+        color: #666;
+        font-size: 14px;
+    }
+
+    .product-box2 .product-name span {
+        margin-left: 2px;
+        color: #666;
+        opacity: 0.8;
+        font-weight: bolder;
+        font-size: 14px;
+    }
+
+    .product-box .product-price {
+        color: var(--primary-color);
+        font-weight: 500;
+        font-size: 14px;
+    }
+
+    .provisional, .total {
+        padding: 10px 0;
+    }
+
+    .delivery {
+        padding: 10px 0;
+    }
+
+        .provisional .provisional-title, .delivery .delivery-title, .total .total-title, .cod-title, .onl-title {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .provisional .provisional-price, .delivery .delivery-price, .total-price {
+            color: var(--primary-color);
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+    .check-pay {
+        margin-top: 20px;
+    }
+
+
+    .onl-desc {
+        display: none;
+        font-size: 14px;
+        margin-bottom: 10px;
+        line-height: 25px;
+        animation: fadeIn 1s forwards;
+    }
+
+    .cod-desc {
+        display: block;
+        font-size: 14px;
+        margin-bottom: 10px;
+        line-height: 25px;
+        animation: fadeIn 1s forwards;
+    }
+
+
+    .check-radio {
+        display: flex;
+        align-items: center;
+        padding: 10px 0;
+    }
+
+    .check-pay-boder {
+        border-bottom: 1px solid #ebebeb;
+    }
+
+
+
+    .cod-title, .onl-title {
+        margin-left: 5px;
+    }
+
+    .pay {
+        margin-top: 20px;
+    }
+
+        .pay button {
+            padding: 10px 15px;
+            background-color: #111;
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+    .form-message {
+        text-align: left;
+        font-size: 13px;
+    }
+
+    .form-group.invalid .form-message {
+        color: #f33a58;
+    }
+
+    .form-group.invalid .form-control {
+        border-color: #f33a58;
+    }
+
+    .fullname, .select-nation, .city, .address, .phone, .email, .pay-method, .note {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .info-order-title {
+        font-size: 15px;
+        color: var(--primary-color);
+        letter-spacing: .5px;
+        margin-bottom: 20px;
+    }
+
+    .info-product ul {
+        padding: 0 20px;
+    }
+
+        .info-product ul li {
+            margin-bottom: 20px;
+            line-height: 20px;
+        }
+
+    .li-product a {
+        text-decoration: none;
+        color: #222;
+    }
+
+    .li-product img {
+        width: 50px;
+        margin-right: 10px;
+    }
+
+    .info-product ul li span {
+        font-weight: 600;
+        color: #111;
+    }
+
+    .span-total {
+        color: var(--primary-color) !important;
+    }
+
+    .li-product-list {
+        list-style: none;
+        padding: 0 !important;
+    }
+
+    .li-product {
+        padding-left: 10px;
+    }
+
+    .li-product-list .li-product-title {
+        margin-bottom: 10px;
+    }
+
+    .li-product a span {
+        display: grid;
+        margin: 4px 0;
+        color: #666 !important;
+        line-height: 26px;
+    }
+
+    .li-product-title {
+        font-weight: normal;
+    }
+</style>

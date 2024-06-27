@@ -1,0 +1,129 @@
+﻿@model IEnumerable<WebsiteBanTraiCay.Models.MOrder>
+@{
+    ViewBag.Title = "Theo dõi đơn hàng";
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+<div style="background:white; min-height:32rem; margin: 40px 0 100px 0">
+    <div class="container-91 mx-auto">
+        <!--<div class="col-3 mt-5">
+        <div class="">
+            <div class="float-left">-->
+        @*<img src="images/boxed-bg.png" ralt="" width="50"
+            class="rounded-circle">*@
+        <!--</div>
+                <div class="float-left pl-3 border-bottom">
+                    <small class="font-weight-bold"> @Session["User_Name"]</small><br>
+
+                </div>
+            </div>
+            <br>
+            <div style="clear:both"></div>
+            <div class="mt-4 pl-3">
+                <ul class="nav flex-column">
+
+                    <li class="nav-item">
+                        <a class="nav-link text-secondary" href="order" style="font-size: 14px;">
+                            <i class="far fa-file-alt"></i>
+                            &nbsp Đơn mua
+                        </a>
+                    </li>
+
+
+                </ul>
+            </div>
+
+        </div>-->
+        <div class="col-12 bg- mt-3" style="">
+
+
+
+            <div class="table-responsive-vertical tab-content shadow-z-1">
+                <!-- Table starts here -->
+                <table role="tabpanel" id="table" @*id="home"*@ class="@*tab-pane active*@ table table-hover table-mc-light-blue">
+                    
+                    <thead>
+
+                        <tr>
+                            <th style="border-top: none">Code</th>
+                            <th style="border-top: none">Tên khách hàng</th>
+                            <th style="border-top: none">Thời gian order</th>
+                            <th style="border-top: none">Thời gian giao hàng(dự kiến)</th>
+                            <th style="border-top: none">Trạng thái đơn hàng</th>
+                            <th style="border-top: none">Chi tiết</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+
+
+                            <tr>
+                                <td class="image" data-title="No">@item.Code</td>
+                                <td class="product-des" data-title="Description">
+                                    <p class="product-name"><a href="#">@item.DeliveryName</a></p>
+
+                                </td>
+                                <td class="price" data-title="Price">   @item.CreateDate</td>
+
+                                <td class="total-amount" data-title="Total">
+
+                                    <strong class="text-danger">@item.ExportDate</strong>
+                                </td>
+                                <td>
+                                    @if (item.Status == 2)
+                                    {
+                                        <span class="text-danger">Chờ duyệt</span>
+                                    }
+                                    else if (item.Status == 1)
+                                    {
+                                        <span class="text-danger">Đã hoàn thành</span>
+                                    }
+                                    else if (item.Status == 3)
+                                    {
+                                        <span class="text-danger">Đã Hủy</span>
+                                    }
+                                </td>
+
+                                <td class="pro-subtotal"> <a href="trackings/@item.ID" target="_blank">Xem thêm</a></td>
+                            </tr>
+
+                        }
+                    </tbody>
+
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+<style>
+    #listtab-order .active {
+        border-bottom: 3px solid #ee4d2d;
+        background: #fff;
+        color: #ee4d2d;
+        border-top: 0;
+        border-left: 0;
+        border-right: 0;
+    }
+
+    .list-group-item {
+        border-bottom: 1px solid #eee;
+        border-top: 0;
+        border-left: 0;
+        border-right: 0;
+    }
+
+    .vertical-center {
+        margin: 0 auto;
+        position: absolute;
+        top: 50%;
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+</style>
+
+
+

@@ -1,0 +1,158 @@
+﻿@using WebsiteBanTraiCay.Library
+@{
+    ViewBag.Title = "Thanh toán";
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+<head>
+    <link rel="stylesheet" href="~/Public/css/stylePay.css" />
+</head>
+@Html.Partial("_Nofit")
+
+
+
+
+<form method="POST" onsubmit="return validateForm()">
+
+    <div class="row box-content">
+        <div class="container">
+            <div class="box-container">
+                <div class="box-user">
+                    <p class="login-title">Bạn đã có tài khoản? <span>Ấn vào đây để đăng nhập</span> </p>
+
+                </div>
+                <div class="row info-cart">
+                    <div class="col-6 info-user profile" id="form-pay">
+                        <p class="font-weight-bold" style="font-size: 20px">THÔNG TIN THANH TOÁN</p>
+
+                        <form action="" method="post"></form>
+
+
+                        <div class="fullname">
+                            <label for="">Họ tên *</label>
+
+                            <input name="FullName" type="text" class="form-control rounded-0"
+                                   value="@(ViewBag.Info.Fullname)">
+                            <span class="form-message"></span>
+
+                        </div>
+                        <div class="phone form-group">
+                            <label for="sdt">Số điện thoại *</label>
+                            <input type="number" name="Phone" value="0@(ViewBag.Info.Phone)" id="sdt" class="form-control">
+                            <span class="form-message"></span>
+                        </div>
+                        <div class="email form-group">
+                            <label for="Email">Email *</label>
+                            <input type="text" name="EmailOrder" value="@ViewBag.Info.Email" id="email" class="form-control">
+                            <span class="form-message"></span>
+                        </div>
+                        <div class="address form-group">
+                            <label for="addRess">Địa chỉ *</label>
+                            <input type="text" name="AddressOrder" value="@ViewBag.Info.Address" id="address" class="form-control">
+                            <span class="form-message"></span>
+                        </div>
+                        <div class="address form-group">
+                            <label for="addRess">Mã giảm giá</label>
+                            <input type="text" name="Voucher" id="voucher" class="form-control">
+                            <span class="form-message"></span>
+                        </div>
+
+
+
+                        <div class="note form-group">
+                            <label for="note">Ghi chú đơn hàng (tùy chọn)</label>
+                            <textarea name="note" id="text-note" cols="100" rows="7" placeholder="Ghi chú về đơn hàng, ví dụ: thời gian hay chỉ dẫn địa điểm giao hàng chi tiết hơn."></textarea>
+                        </div>
+
+
+                    </div>
+
+                    @*<div class="info-product-boder">
+
+                        </div>*@
+                    <div class="col-5 info-product-buy" id="form-info-pay">
+                        <div class="info-product">
+                            <div class="info-product-title">
+                                <p style="font-size: 20px" class="font-weight-bold info-order-title">ĐƠN HÀNG THANH TOÁN</p>
+                            </div>
+
+
+                            <div class="product-pay">
+                                <span class="product-title">SẢN PHẨM</span>
+                                <span class="product-price">TỔNG</span>
+                            </div>
+                            @{ double TongHoaDon = 0;}
+                            @{ double TongSanPham = 0;}
+
+                            <div class="product-box">
+                                @foreach (var c in (List<ModelCart>)Session["Cart"])
+                                {
+                                    TongHoaDon += (c.Price * c.Quantity);
+                                    TongSanPham = (c.Price * c.Quantity);
+                                    <div class="product-box2">
+                                        <div>
+                                            <img style="width: 60px; height: 60px; margin-right: 5px" src="~/Public/images/products/@c.Image" alt="@c.Name" />
+
+                                            <span class="product-name">@c.Name × @c.Quantity</span>
+                                        </div>
+
+                                        <span class="product-price">@String.Format("{0:0,0₫}", TongSanPham)</span>
+                                    </div>
+                                }
+
+                            </div>
+                            <div class="delivery">
+                                <span class="delivery-title">Giao hàng </span>
+                                <div class="delivery-price">
+                                    <span>Giao hàng miễn phí</span>
+
+                                </div>
+                            </div>
+                            <div class="total">
+                                <span class="total-title">Tổng </span>
+                                <span class="total-price">@String.Format("{0:0,0₫}", TongHoaDon)</span>
+                            </div>
+
+                            @*<div class="check-pay">
+                                <div class="check-pay-cod">
+                                    <div class="check-radio">
+                                        <input checked="check" name="checked" id="cod" class=" check-radio-cod" type="radio">
+                                        <span class="check-pay-title cod-title"> <span> Trả tiền mặt khi nhận hàng</span></span>
+                                    </div>
+                                    <span class="cod-desc">Trả tiền mặt khi giao hàng.</span>
+                                </div>
+                                <div class="check-pay-boder"></div>
+                                <div class="check-pay-online">
+                                    <div class="check-radio">
+                                        <input name="checked" id="onl" class=" check-radio-onl" type="radio">
+                                        <span class="check-pay-title onl-title"> <span> Chuyển khoản ngân hàng</span></span>
+                                    </div>
+
+                                    <span class="onl-desc">Thực hiện thanh toán vào ngay tài khoản ngân hàng của chúng tôi. Vui lòng sử dụng Mã đơn hàng của bạn trong phần Nội dung thanh toán. Đơn hàng sẽ đươc giao sau khi tiền đã chuyển.</span>
+
+                                </div>
+                            </div>*@
+                            <div class="pay">
+
+
+                                <button id="checkout" type="submit">
+                                    ĐẶT HÀNG
+
+                                </button>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+</form>
+
+
+
