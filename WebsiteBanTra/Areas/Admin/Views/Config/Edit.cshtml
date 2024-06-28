@@ -1,0 +1,158 @@
+﻿@model WebsiteBanTraiCay.Models.MConfig
+
+@{
+    ViewBag.Title = "Cấu hình Website";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@Html.Partial("_MessageAlert")
+
+@using (Html.BeginForm("Edit", "Config", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <section class="content py-2">
+        <div class="container-fluid">
+            <!--Content-->
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-8">
+                            <h5 class="text-csm">@ViewBag.Title</h5>
+                        </div>
+                        <div class="col-4">
+                            <div class="float-right pt-1">
+                                <button type="submit" class="btn btn-primary btn-sm">
+                                    <i class="fas fa-save"></i>&nbsp; Update
+                                </button>
+                                <button type="button" class="btn btn-danger btn-sm">
+                                    <a href="~/Admin" class="text-white"><i class="fas fa-door-open"></i>&nbsp; Thoát</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.LogoIconWeb)
+                            @Html.HiddenFor(model => model.LogoWeb)
+                            <div class="form-group">
+                                <label><strong class="input">Tên Website của bạn(<span class="text-danger">*</span>)</strong></label>
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label><strong class="input">SĐT của bạn(<span class="text-danger">*</span>)</strong></label>
+                                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label><strong class="input">SĐT 2 của bạn(<span class="text-danger">*</span>)</strong></label>
+                                @Html.EditorFor(model => model.Phone_1, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Phone_1, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+                                <label><strong class="input">Địa chỉ của bạn(<span class="text-danger">*</span>)</strong></label>
+                                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label><strong class="input">Gmail của bạn(<span class="text-danger">*</span>)</strong></label>
+                                @Html.EditorFor(model => model.Gmail, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Gmail, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Icon Web", htmlAttributes: new { @class = "control-label" })
+
+                                <div class="">
+                                    @Html.TextBoxFor(model => model.LogoIconWeb, new { type = "file", @class = "control-label" })
+                                    @Html.ValidationMessageFor(model => model.LogoIconWeb, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Logo Web", htmlAttributes: new { @class = "control-label" })
+
+                                <div class="">
+                                    @Html.TextBoxFor(model => model.LogoWeb, new { type = "file", @class = "control-label" })
+                                    @Html.ValidationMessageFor(model => model.LogoWeb, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr style="background-color:red" />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label><strong class="input">Mã TalkTo(<span class="text-danger">*</span>)</strong></label>
+                                @Html.EditorFor(model => model.APITalkTo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.APITalkTo, "", new { @class = "text-danger" })
+
+                            </div>
+
+                            <div class="form-group">
+                                <label><strong class="input">Mã Mess Facebook(<span class="text-danger">*</span>)</strong></label>
+                                @Html.EditorFor(model => model.MessFacebook, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.MessFacebook, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label><strong class="input">Hotline Zalo(<span class="text-danger">*</span>)</strong></label>
+                                @Html.EditorFor(model => model.Zalo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Zalo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label><strong class="input">Google Map(<span class="text-danger">*</span>)</strong></label>
+                                @Html.EditorFor(model => model.Google_Maps, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Google_Maps, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label><strong class="input">Mã theo dõi Analytic Website(<span class="text-danger">*</span>)</strong></label>
+                                @Html.EditorFor(model => model.Analytic, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Analytic, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label><strong class="input">Mã theo dõi Web Master Tool(<span class="text-danger">*</span>)</strong></label>
+                                @Html.EditorFor(model => model.WebMasterTool, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.WebMasterTool, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    @*<hr  style="background-color:red"/>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h3 style="color:red">Hướng dẫn lấy mã TalkTo</h3>
+                                B1: Truy cập: https://www.tawk.to/
+                               <br />
+                                B2: Nhấn Đăng ký mới
+                               <br />
+                                B3: Cấu hình
+                               <br />
+                                B4: Tiến hành lấy mã TalkTo
+                                <br />
+                                Mã lấy là: 63a5cbc0474251287909c5fd/1gkvq7qgd
+                                <br />
+                            </div>
+                            <div class="col-md-6">
+
+                                <img src="~/Public/images/talkto/screenshot_1671812244.png" />
+
+                            </div>
+                        </div>*@
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
