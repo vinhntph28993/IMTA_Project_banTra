@@ -1,0 +1,92 @@
+﻿
+@{ int role = Convert.ToInt32(Session["Admin_Role"]); }
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.ckeditor.com/ckeditor5/19.1.1/decoupled-document/ckeditor.js"></script>
+    <link rel="stylesheet" href="~/Public/Admin/css/all.min.css">
+    @Html.Action("Favicon", "Config")
+    <link href="~/Public/Admin/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet">
+
+    <link href="~/Public/Admin/css/summernote-bs4.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="~/Public/Admin/css/adminlte.min.css">
+    <link rel="stylesheet" href="~/Public/Admin/css/OverlayScrollbars.min.css">
+    <link href="~/Public/Admin/css/sweetalert2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Public/Admin/css/dataTables.bootstrap4.min.css">
+    <link href="~/Public/Admin/css/toastr.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Public/Admin/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="~/Public/Admin/css/font-sans.pro.css">
+    <style>
+        .note-editable {
+            min-height: 200px;
+        }
+
+        .note-toolbar {
+            margin: 0 auto;
+            padding: 5px 0;
+        }
+
+        .text-csm {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #dc3545;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 17px;
+            padding: 10px 0 0 10px;
+        }
+    </style>
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="overlay justify-content-center align-items-center d-none bg-secondary w-100 h-100 position-absolute" style="z-index:1; opacity:.3" id="delay"><i class="fas fa-2x fa-sync fa-spin"></i>Đang xử lý...</div>
+    <div class="wrapper">
+        @Html.Action("HeaderLayout", "Modules")
+
+        @Html.Action("LeftLayouts", "Modules")
+        <div class="content-wrapper">
+            @RenderBody()
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+
+        </div>
+        <strong>Copyright &copy; <a href="#">Admin</a>.</strong> All rights
+        reserved.
+    </footer>
+
+
+    <script src="~/Public/Admin/js/jquery.min.js"></script>
+    <script src="~/Public/Admin/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/Public/Admin/js/jquery.overlayScrollbars.min.js"></script>
+    <script src="~/Public/Admin/js/adminlte.min.js"></script>
+
+    <script src="~/Public/Admin/js/jquery.dataTables.min.js"></script>
+    <script src="~/Public/Admin/js/dataTables.bootstrap4.min.js"></script>
+
+
+    <script src="~/Public/Admin/js/sweetalert2.min.js"></script>
+    <script src="~/Public/Admin/js/summernote-bs4.min.js"></script>
+
+    <script src="~/Public/Admin/js/j.js"></script>
+    <script src="~/Public/Admin/js/toastr.min.js"></script>
+    <script src="~/Public/Admin/js/karma.laclac.min.js"></script>
+    <script>$(function () { $('.textarea').summernote() })</script>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v9.0&appId=699266887289373&autoLogAppEvents=1" nonce="xJm9L3lp"></script>
+    <script src="~/CKFinderScripts/ckfinder.js"></script>
+    
+</body>
+
+</html>
