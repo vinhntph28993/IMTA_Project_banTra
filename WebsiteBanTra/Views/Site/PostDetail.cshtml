@@ -1,0 +1,214 @@
+﻿@model WebsiteBanTraiCay.Models.MPost
+@{
+    ViewBag.Title = Model.Title;
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+<style>
+    .shop-sidebar aside {
+        width: 100%;
+        padding: 5px;
+        box-shadow: 0px 0px 5px 0px rgb(0 0 0 / 10%)
+    }
+
+    .nav-menu, .nav-product {
+        width: 100%;
+        margin-bottom: 24px;
+    }
+
+    .nav-menu-title {
+        width: 100%;
+        padding: 15px 20px;
+        text-align: left;
+        letter-spacing: 1px;
+        font-size: 16px;
+        color: white;
+        font-weight: 500;
+        background-color: var(--primary-color);
+    }
+
+    .menu-content-list, .product_list_widget-list {
+        list-style: none;
+        margin-top: 5px;
+    }
+
+    .product_list_widget-list {
+        height: 400px;
+        overflow: hidden;
+    }
+
+    .shop-sidebar ul li:nth-child(odd) {
+        background-color: #fafafa;
+    }
+
+    .menu-content-items {
+        padding: 5px 20px;
+        line-height: 35px;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+    }
+
+        .menu-content-items a {
+            color: #555;
+            text-decoration: none;
+            transition: 0.2s
+        }
+
+            .menu-content-items a:hover {
+                color: var(--primary-color)
+            }
+
+    .list_widget-items a {
+        text-decoration: none;
+        font-size: 14px;
+        color: #555;
+        font-weight: 500;
+        padding: 5px 0;
+    }
+
+    .menu-content-items:hover {
+        color: var(--primary-color);
+    }
+    .shop-page-left {
+        font-size: 18px;
+    }
+
+        .shop-page-left a {
+            text-decoration: none;
+            color: rgba(102,102,102,0.7);
+        }
+
+        .shop-page-left .divider {
+            margin: 0 5px;
+            color: rgba(102,102,102,0.7);
+        }
+
+        .shop-page-left .shop {
+            font-weight: bold;
+            color: #222;
+            text-transform: uppercase;
+        }
+
+
+</style>
+<div class="container breadcrumb-c clearfix d-block text-uppercase mt-3 shop-page-left">
+   
+    <a  href="/">Tin tức</a>
+    <span class="divider">/</span>
+    <span class="shop"> <a href="~/@ViewBag.breadcrumb.Slug" style="color: #111"> @ViewBag.breadcrumb.Name</a></span>
+
+</div>
+<div class="container row tin-tuc "  style="align-items: normal">
+        <div class="col-3 shop-sidebar">
+            <aside class="nav-menu">
+                <p class="nav-menu-title" style="margin: 0">
+                    TIN TỨC THEO CHỦ ĐỀ
+
+                </p>
+                <div class="nav-menu-content">
+                    <ul class="menu-content-list">
+                        @foreach (var v in ViewBag.TopicName)
+                        {
+                            <li class=" menu-content-items">
+                                <a href="~/@v.Slug">
+                                    @if (@ViewBag.breadcrumb.Slug == v.Slug)
+                                    {
+                                        @v.Name
+                                    }
+                                    else
+                                    {
+                                        @v.Name
+                                    }
+                                </a>
+                            </li>
+                        }
+
+                        <li class="menu-content-items">
+                            <a href="~/"></a>
+                            @*<ul class="menu-content-list-nav">
+                            @foreach (var d in Model)
+                            {
+                                if (c.ID == d.ParentID)
+                                {
+                                    <li>
+                                        <a href="~/@d.Slug" class="">@d.Name</a>
+                                    </li>
+                                }
+                            }
+                        </ul>*@
+                        </li>
+
+
+
+                    </ul>
+
+                </div>
+            </aside>
+
+
+        </div>
+        @*<div class="my-3">
+            <div class="title ">
+                BÀI VIẾT CÙNG CHỦ ĐỀ
+            </div>
+            @foreach (var c in ViewBag.listOther)
+            {
+                <div class="mt-3">
+                    <a href="@c.Slug">
+                        <div class="row">
+                            <div class="col-3">
+                                <div class="image">
+                                    <img src="~/Public/images/post/@c.Image" alt="">
+                                </div>
+                            </div>
+                            <div class="col-9">
+                                <div class="desc-right">
+                                    <div class="cate-left">
+                                        @c.Title
+                                    </div>
+                                    <div class="cate float-left mt-1">
+                                        @foreach (var d in ViewBag.TopicName)
+                                        {
+                                            if (c.TopicID == d.ID)
+                                            {
+                                                @d.Name}
+                                        }
+                                    </div>
+                                    <div class="time float-left mt-1 pl-2"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>  }
+        </div>*@
+
+
+
+    <div class="col-9">
+        <div class="mid-title">
+            <span class="font-weight-bold" style="font-size: 20px">
+
+            @Model.Title
+            </span>
+            <div class="row">
+                <div class="col-6" style="color: #111">  <span>Ngày đăng: @Model.Created_at  </span></div>
+               
+
+            </div>
+            <hr>
+        </div>
+        <div class="desc-title mb-3">
+            @Model.Description
+        </div>
+        <div class="content">
+            @Html.Raw(Model.Detail)
+            <div class="border-bottom pb-2 border-success"></div>
+
+            <div class="commment-fb-cus my-3">
+                <div class="fb-comments" data-href="https://localhost:44376/Site/PostDetail/@Model.ID" data-numposts="5" data-width="100%"></div>
+            </div>
+        </div>
+    </div>
+
+</div>

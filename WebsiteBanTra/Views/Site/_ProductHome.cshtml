@@ -1,0 +1,80 @@
+﻿@model IEnumerable<WebsiteBanTraiCay.Models.MProduct>
+@*@foreach (var row in Model)
+{
+    <div class="t-item">
+        <a href="~/@row.Slug">
+            <div class="t-img">
+                <img src="~/Public/images/products/@row.Image" alt="" class="beau">
+                @if (row.Installment == 1)
+                {
+                    
+                }
+
+            </div>
+            <div class="couple">
+                @if (row.Discount == 1)
+                {
+                    <img src="~/Public/images/online-giảm-sốc-1x.png" alt="" class="h-100">
+                }
+            </div>
+            <div class="t-np">
+                @row.Name
+            </div>
+            <div class="t-price">
+                <div class="price">
+                    @String.Format("{0:0,0₫}", row.ProPrice)
+                </div>
+                <div class="old-price float-left">
+                    @String.Format("{0:0,0₫}", row.Price)
+                </div>
+                <div class="khongbietdattenlagi float-left">(-@String.Format("{0:0}", ((row.Price - row.ProPrice) / row.Price * 100))%)</div>
+            </div>
+        </a>
+    </div>
+}
+*@
+<div class="product__box-products">
+    @foreach (var p in Model)
+    {
+        <div class="product__box-products-item">
+            <a class="product__box-products-item-img" href="@p.Slug">
+                @if (p.Installment == 1)
+                {
+
+                }
+                <img class="img-current" src="~/Public/images/products/@p.Image" alt="">
+            </a>
+            <div class="product__box-info-product">
+                <a class="product__box-name-product" href="@p.Slug">
+                    <span>
+                        @p.Name
+                    </span>
+                </a>
+                <div class="product__box-info-product-price">
+                    <span class="price-current">
+                        @String.Format("{0:0,0₫}", p.Price)
+
+                    </span>
+                    <span class="price-sale">
+                        @String.Format("{0:0,0₫}", p.ProPrice)
+
+                    </span>
+                </div>
+            </div>
+            @*<div class="add-product-box">
+                    <div class="add-product">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </div>
+                </div>*@
+            <div class="box-discount">
+                <span class="percent-discount">
+                    -@String.Format("{0:0}", ((p.Price - p.ProPrice) / p.Price * 100))%
+                </span>
+
+            </div>
+        </div>
+
+
+
+    }
+</div>

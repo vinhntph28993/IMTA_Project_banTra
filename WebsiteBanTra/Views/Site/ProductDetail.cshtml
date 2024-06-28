@@ -1,0 +1,1092 @@
+﻿@model WebsiteBanTraiCay.Models.MProduct   
+@{
+    ViewBag.Title = Model.Name;
+    ViewBag.MetaKey = Model.MetaKey;
+    ViewBag.MetaDesc = Model.MetaDesc;
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+
+<style>
+    .breadcrumb-c .dsfsd a::after {
+        content: "";
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    :root {
+        --primary-color: #cc2121;
+    }
+
+    .product {
+        margin-top: 80px;
+    }
+
+    .shop-page {
+        width: 100%;
+        min-height: 60px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 20px;
+    }
+
+    .shop-page-left {
+        font-size: 18px;
+    }
+
+        .shop-page-left a {
+            text-decoration: none;
+            color: rgba(102,102,102,0.7);
+        }
+
+        .shop-page-left .divider {
+            margin: 0 5px;
+            color: rgba(102,102,102,0.7);
+        }
+
+        .shop-page-left .shop {
+            font-weight: bold;
+            color: #222;
+        }
+
+
+
+    .shop-page-right .span-title {
+        font-size: 16px;
+        margin-right: 16px;
+    }
+
+    .shop-page-right .select {
+        border: 1px solid #ccc;
+        outline: none;
+        box-shadow: 0 0 6px #ccc;
+        min-width: 200px;
+        min-height: 39px;
+        font-size: 15px;
+        padding: 0 10px;
+    }
+
+        .shop-page-right .select:hover {
+            box-shadow: none;
+        }
+
+    .main {
+        width: 100%;
+        height: 100vh;
+        padding: 30px 0;
+        margin-top: 141px;
+    }
+
+    .container {
+        height: 100%;
+    }
+
+    .main-left {
+        width: 25%;
+        height: 100%;
+        padding: 0 15px 30px 0;
+    }
+
+    .main-right {
+        width: 75%;
+        height: 700px;
+        padding: 0 15px 30px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .shop-sidebar aside {
+        width: 100%;
+        height: 100%;
+        padding: 5px;
+        box-shadow: 0px 0px 5px 0px rgb(0 0 0 / 10%)
+    }
+
+    .nav-menu, .nav-product {
+        width: 100%;
+        height: 100%;
+        margin-bottom: 24px;
+    }
+
+    .nav-menu-title {
+        width: 100%;
+        padding: 20px;
+        text-align: left;
+        letter-spacing: 1px;
+        font-size: 16px;
+        color: white;
+        font-weight: 500;
+        background-color: var(--primary-color);
+    }
+
+    .menu-content-list, .product_list_widget-list, .posts_list_widget-list {
+        list-style: none;
+        margin-top: 5px;
+    }
+
+    /* .product_list_widget-list {
+    height: 400px;
+    overflow: hidden;
+} */
+    .shop-sidebar ul li:nth-child(odd) {
+        background-color: #fafafa;
+    }
+
+    .menu-content-items {
+        padding: 5px 20px;
+        line-height: 35px;
+    }
+
+        .menu-content-items a, .list_widget-items a, .posts-list_widget-items a {
+            text-decoration: none;
+            font-size: 14px;
+            color: #555;
+            font-weight: 500;
+            padding: 5px 0;
+        }
+
+    .posts-list_widget-items {
+        display: flex;
+        align-items: center;
+        padding: 15px 20px;
+    }
+
+    .menu-content-items:hover a {
+        color: var(--primary-color);
+    }
+
+    .img-product {
+        width: 60px;
+        height: 60px;
+    }
+
+    .list_widget-items {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        padding: 10px;
+        line-height: 20px;
+    }
+
+        .list_widget-items:hover .info-product a, .posts-list_widget-items:hover .info-post a {
+            color: var(--primary-color);
+        }
+
+    .post-date {
+        width: 50px;
+        border-radius: 50%;
+        background-color: var(--primary-color);
+        padding: 10px;
+        color: white;
+        font-size: 12px;
+        margin-right: 15px;
+        text-align: center;
+    }
+
+    .post-date-day {
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .post-date-month {
+        font-size: 11px;
+    }
+
+    .info-post a p {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 2;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        color: #444;
+    }
+
+    .price {
+        display: flex;
+        font-size: 14px;
+    }
+
+    .price-old, .price-new {
+        margin-right: 5px;
+        color: var(--primary-color);
+    }
+
+    .price-new {
+        font-weight: 500;
+    }
+
+    .price-old {
+        opacity: 0.6;
+        text-decoration: line-through;
+    }
+
+    .img-product img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .main-right-product {
+        width: 25%;
+        padding: 0 10px 30px;
+        position: relative;
+    }
+
+    .product__box-products-item-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+    }
+
+    .main-right-product:hover .add-product-box {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .main-right-product:hover .img-hover {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .main-right .add-product {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        cursor: pointer;
+        border: 2px solid #ccc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        transition: 0.5s;
+    }
+
+    .main-right .product__box-products-item-img {
+        width: 200px;
+        height: 200px;
+    }
+
+    .hideDiscount {
+        display: none;
+    }
+
+    /* main right */
+
+    
+
+        .main-right .info-product {
+            width: 100%;
+            display: flex;
+        }
+
+            .main-right .info-product .main-left-img {
+                width: 30%;
+            }
+
+    .product-img {
+        position: relative;
+        cursor: pointer;
+    }
+
+
+    .main-left-img .product-img img {
+        width: 100%;
+        object-fit: contain;
+        object-position: center;
+    }
+
+    .product-img .left {
+        position: absolute;
+        top: 194px;
+        left: 30px;
+        font-size: 30px;
+        opacity: 0;
+        transition: .5s;
+        z-index: 1;
+        color: #555;
+    }
+
+    .product-img .right {
+        position: absolute;
+        top: 194px;
+        right: 30px;
+        font-size: 30px;
+        opacity: 0;
+        transition: .5s;
+        z-index: 1;
+        color: #555;
+    }
+
+    .product-img:hover .left {
+        opacity: 1;
+        transform: translate(-10px, 0);
+    }
+
+    .product-img:hover .right {
+        opacity: 1;
+        transform: translate(10px, 0);
+    }
+
+    .box-discount-product {
+        width: 60px;
+        height: 60px;
+        background: black;
+        border-radius: 50%;
+        position: absolute;
+        top: 22px;
+        left: 22px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .box-discount-product span {
+            color: white;
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+    .product-thumbnails {
+        width: 100%;
+        display: flex;
+        margin-top: 10px;
+    }
+
+    .product-thumbnails-img {
+        width: 25%;
+        padding: 0 10px;
+    }
+
+        .product-thumbnails-img img {
+            width: 100%;
+            cursor: grab;
+            transition: 0.5s;
+        }
+
+
+        .product-thumbnails-img:hover a {
+            opacity: 1;
+            border: 1px solid #ccc;
+            outline: none;
+        }
+
+        .product-thumbnails-img:hover img {
+            transform: translate(0, -4px);
+        }
+
+    .active {
+        opacity: 1 !important;
+        border: 1px solid #ccc;
+    }
+
+    .product-thumbnails-img a {
+        display: block;
+        opacity: 0.5;
+        transition: 0.5s;
+        overflow: hidden;
+    }
+
+    .is-divier {
+        height: 1px;
+        display: block;
+        background-color: rgba(0,0,0,0.1);
+        margin: 1em 0 1em;
+        max-width: 100%;
+    }
+
+    .location {
+        font-size: 13px;
+        margin-bottom: 10px;
+    }
+
+        .location a, .location span {
+            text-decoration: none;
+            color: rgba(102,102,102,0.7);
+            
+        }
+    .main-right-info {
+        margin-left: 30px;
+        width: 70%
+    }
+
+    .main-right-info .product-title {
+        font-size: 26px;
+        font-weight: 550;
+    }
+
+    .price-wrapper {
+        color: var(--primary-color);
+        font-size: 24px;
+        display: flex;
+        margin-bottom: 15px;
+    }
+
+        .price-wrapper .price-current {
+            text-decoration: line-through;
+            opacity: 0.6;
+            margin-right: 15px;
+        }
+
+        .price-wrapper .price-sale {
+            font-weight: 550;
+        }
+
+    .btn-dec, .btn-inc {
+        width: 25px;
+        height: 40px;
+        border: 1px solid #ccc;
+        cursor: pointer;
+    }
+
+    .input-value {
+        width: 40px;
+        height: 40px;
+        border: none;
+        text-align: center;
+        margin: 0 -5px;
+        border: 1px solid #ccc;
+    }
+
+    .cart-quantity .btn-dec:hover,
+    .cart-quantity .btn-inc:hover {
+        background-color: #ccc;
+    }
+
+    .cart {
+        display: flex;
+    }
+
+        .cart button {
+            margin-top: 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #111;
+            padding: 0 16px;
+            font-weight: 550;
+            cursor: pointer;
+        }
+
+    /*Product*/
+    .product {
+        width: 100%;
+        position: relative;
+        background-color: white;
+        display: block;
+    }
+
+    .product__box {
+        width: 100%;
+        height: 100%;
+        text-align: center;
+    }
+
+    .promo-so .product__box {
+        background: #ffe6dd
+    }
+
+    .promo-so1 .product__box {
+        background-color: #ffe6dd
+    }
+
+    .product__box-content {
+        width: 100%;
+    }
+
+        .product__box-content p {
+            margin-top: 20px;
+            color: #111;
+        }
+
+        .product__box-content h2 {
+            font-weight: 500;
+            font-size: 18px;
+            text-align: left;
+            padding: 20px 20px 0 20px;
+            margin-bottom: 0;
+            text-transform: uppercase;
+            font-weight: 600
+        }
+
+    .promo-so .product__box-content h2 {
+        color: var(--primary-color);
+    }
+
+    .promo-so1 .product__box-content h2 {
+        color: #555;
+    }
+
+
+    .product__box-products {
+        width: 100%;
+        max-height: 573px;
+        display: flex;
+        flex-wrap: wrap;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .product__box-products-item {
+        width: 20%;
+        height: 260px;
+        padding: 0 10px;
+        margin-top: 20px;
+        position: relative;
+    }
+
+    .product__box-info-product {
+        text-align: center;
+        background: white;
+        border-top: 1px solid #ccc;
+    }
+
+    .product__box-products-item .img-current {
+        width: 80%;
+        height: 80%;
+        object-fit: cover;
+        object-position: center;
+        margin-top: 18px;
+        transform: scale(1);
+        transition-duration: .4s;
+        object-fit: scale-down;
+    }
+
+    .product__box-products-item-img {
+        display: block;
+        position: relative;
+        height: 200px;
+        background: white;
+    }
+
+    .product__box-products-item .img-current:hover {
+        transform: scale(1.2);
+        transition-duration: .4s;
+        object-fit: scale-down;
+    }
+
+    .product__box-products-item .img-new-small {
+        width:80px;
+        height:45px;
+        position: absolute;
+        top: -4px;
+        right: -7px;
+    }
+
+    .img-hover {
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        visibility: hidden;
+        transition: visibility 0s, opacity 0.3s ease;
+    }
+
+    .product__box-name-product {
+        text-decoration: none;
+        font-size: 14px;
+        color: #111;
+        display: block;
+        font-weight: 500;
+        padding: 4px 10px 0 10px;
+    }
+
+        .product__box-name-product:hover {
+            text-decoration: none;
+        }
+
+        .product__box-name-product span {
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            overflow: hidden;
+            display: -webkit-box;
+            color: #555;
+            transition: .3s
+        }
+
+            .product__box-name-product span:hover {
+                color: var(--primary-color)
+            }
+
+    .product__box-info-product-price {
+        margin: 4px 0;
+        padding: 0 10px
+    }
+
+        .product__box-info-product-price .price-current {
+            font-size: 14px;
+            padding-right: 5px;
+            color: var(--primary-color);
+            opacity: 0.6;
+            text-decoration: line-through;
+        }
+
+    .quantity {
+        display: none;
+    }
+
+    .wishlist-box-item-quantity {
+        display: none;
+    }
+
+    .product__box-info-product-price .price-sale {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--primary-color);
+    }
+
+    .add-product-box {
+        opacity: 0;
+        visibility: hidden;
+        transition: visibility 0s, opacity 0.3s linear;
+    }
+
+    .product__box-products-item:hover .add-product-box {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .product__box-products-item:hover .img-hover {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .add-product {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        cursor: pointer;
+        border: 2px solid #ccc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        transition: 0.5s;
+    }
+
+        .add-product i {
+            color: #ccc;
+        }
+
+    .add-product-box:hover .add-product {
+        background-color: var(--primary-color);
+        border: none;
+    }
+
+    .add-product-box:hover i {
+        color: white;
+    }
+
+    /* box discount */
+    .box-discount {
+        width: 35px;
+        height: 35px;
+        background: black;
+        border-radius: 50%;
+        position: absolute;
+        top: 33px;
+        left: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .percent-discount {
+        color: white;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    .hideDiscount {
+        display: none;
+    }
+
+    .all-product {
+        padding: 30px 0;
+    }
+
+        .all-product a button {
+            padding: 8px 20px;
+            border: none;
+            background: var(--primary-color);
+            color: white;
+            font-weight: 600;
+            transition: 0.3s
+        }
+
+        .all-product a {
+            margin: 0 auto
+        }
+
+            .all-product a button:hover {
+                background: #111;
+            }
+</style>
+<div class="breadcrumb-c clearfix mb-5 mt-3">
+    @*<ul class="container-91">
+        <li><a href="/">Trang chủ </a></li>
+        <li class="dsfsd"><a href="~/@ViewBag.CS"> @ViewBag.CN</a></li>
+    </ul>*@
+    <div class="container-91 location">
+            <a href="./index.html">TRANG CHỦ</a>
+            <span style="margin: 0 5px;">/</span>   
+            <a href="~/@Model.Slug">@Model.Name</a>
+        </div>
+</div>
+
+<!--<div class="container-91 detail-pt clearfix mt-2">
+
+    <div class="title-top pb-1">
+        <div class="row">
+            <div class="col-9">
+                @Model.Name
+            </div>
+            <div class="col-3">
+                <div class="text-right">
+                    <div class="fb-like" data-href="https://localhost:44376/Site/ProductDetail" data-width="" data-layout="standard" data-action="like" data-size="small" data-share="true"></div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="row my-3">
+        <div class="col-5">
+            <a href=""> <img class="img-product mt-5" src="~/Public/images/products/@Model.Image" alt="" width="90%"></a>
+        </div>
+        <div class="col-4">
+
+
+            <div class="bao-gia clearfix">
+                <small class="d-inline float-left mt-1 text-secondary mr-2">Giá mua : <a href="javascript::void(0)" class="text-decoration-none text-info">Online: </a> </small>
+                <h5 class="font-weight-bold text-dark">
+                    @String.Format("{0:0,0₫}", Model.Price)
+                </h5>
+                @if (Model.Installment == 1)
+                {
+        <div style="float:right;top:-10px;right:5px;background:#f28902; margin:0 0 0 15px; border-radius:4px;color:#f3f3f3; font-size:11px;width:70px;padding:0 5px; position:absolute">
+
+        </div>}
+            </div>
+
+            <div class="row">
+                <div class="col-12 bg-danger rounded-top"
+                     style="background: linear-gradient(to right,#e75a23 0,#bf081f 100%);">
+                    <div class="text-light text-center font-weight-bold py-2 mt-2">
+                        GIÁ SỐC KHI MUA TẠI CỬA HÀNG
+                        <strong class="text-warning d-inline-block">
+                            @String.Format("{0:0}", ((Model.Price - Model.ProPrice) / Model.Price * 100))%
+                        </strong>
+                    </div>
+                </div>
+                <div class="col-12 rounded-bottom" style="background:#eee">
+                    <div class="text-center font-weight-bold py-2 mt-2 h4" style="color:#bf081f">
+                        @String.Format("{0:0,0₫}", Model.ProPrice)
+                    </div>
+                </div>
+            </div>
+
+
+            @Html.Raw(Model.Detail)-->
+            @*<div class="row my-2 border">
+            <div class="col-12 bg-light">
+                <div class="pl-3 font-weight-bold py-2 mt-2 float-left">KHUYẾN MẠI</div> <small class="float-left text-secondary pl-2 pt-3"> (Áp dụng dự kiến đến 07/07/2027)</small>
+            </div>
+            <div class="col-12" style="min-height:200px">
+                @{int count = 1;
+                    foreach (var i in Model.NewPromotion.Split(new[] { '\n' }))
+                    {
+                        <small class="rounded-circle bg-primary px-1 text-light d-inline">@count</small> <small class="text-dark"> @i</small><br>
+                        count++;
+                    }
+                }
+            </div>
+        </div>*@
+
+
+
+            <!--<div class="mt-3" style="display : none">
+                <small class="text-secondary d-inline pr-3">Số lượng</small>
+
+                <div class="btn btn-white rounded-0 border tru" onclick="return Tru();"
+                     style="width:30px; height:30px;margin-top:-2px; line-height:15px;font-weight: bold;">
+                    -
+                </div>
+                <input type="number" style="width:50px; height:30px;margin:0 -6px;outline:0;text-align:center"
+                       class="rounded-0 border text-secondary etd pl-3 border-right-0" value="1" min="1"
+                       id="qtyDpt">
+                <div class="btn btn-white rounded-0 border cong" onclick="return Cong();"
+                     style="width:30px; height:30px;margin-top:-2px; line-height:15px;font-weight: bold;">
+                    +
+                </div>
+                <input type="text" name="count-xyz" style="display:none" value="@Model.Quantity" />
+                <small class="text-secondary d-inline ml-4">@Model.Quantity sản phẩm có sẵn</small>
+            </div>
+            <small class="text-secondary d-inline">@Model.Quantity sản phẩm có sẵn</small>
+            <div class="row">
+                <div class="col-6">-->
+                    @*<div class="nut-mua" id="buy-btn" data-id="@Model.ID">
+                        <button style="width:100%; height:49px; border:1px solid #ee4d2d; background:rgba(255,87,34,.15); color:#ee4d2d; font-size:14px">
+                            <i class="fas fa-cart-plus"></i> &nbsp Thêm vào giỏ hàng
+                        </button>
+                    </div>*@
+                <!--</div>
+                <div class="col-6">-->
+
+                    @*<div class="nut-mua">
+                    <a href="thanh-toan" class="text-decoration-none text-light" data-id="<%= result.ID%>" id="add-one-p-t-c">
+                        <button style="width:100%; height:49px;border:0; background:-webkit-linear-gradient(top,#f59000,#fd6e1d);color:#fff; font-size:14px">
+                            Mua ngay
+                        </button>
+                    </a>
+                </div>*@
+
+                    @*<div class="nut-mua" data-id="<%= result.ID%>">
+                    <button style="width:100%; height:49px;border:0; background:-webkit-linear-gradient(top,#f59000,#fd6e1d);
+                color:#fff; font-size:14px" id="thanh-toan">
+                        Mua ngay
+                    </button>
+                </div>*@
+
+
+                <!--</div>
+            </div>
+
+        </div>
+        <div class="col-3">
+            <div class="border mt-4">
+                <div class="text-success font-weight-bold text-center h6 py-2 mt-2">
+                   MUA SẮM ONLINE - TIỆN LỢI, NHANH CHÓNG
+                </div>
+                <small class="text-secondary border-bottom d-block pl-3 py-2 mt-2">
+                    <i class="fas fa-cogs fa-2x text-success pr-2"></i>
+                   Sản phẩm luông được cập nhập <b>mới nhất</b>
+                </small>
+                <small class="text-secondary border-bottom d-block pl-3 py-2 mt-2">
+                    <i class="fas fa-cogs fa-2x text-success pr-2"></i>
+                   Ưu đãi khách hàng thân thiết
+                </small>
+                <small class="text-secondary border-bottom d-block pl-3 py-2 mt-2">
+                    <i class="fas fa-cogs fa-2x text-success pr-2 "></i>
+                    Miễn phí vẫn chuyển <b>nội thành </b>
+                </small>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>-->
+<div class="row container main-right">
+    
+    <div class="col-md-12 info-product">
+        <div class="main-left-img">
+            <div class="product-img">
+                <i class="fa-solid fa-angle-left left"></i>
+                <img src="~/Public/images/products/@Model.Image" alt="">
+                
+                <i class="fa-solid fa-angle-right right"></i>
+                <div class="box-discount-product">
+                    <span> @String.Format("{0:0}", ((Model.Price - Model.ProPrice) / Model.Price * 100))%</span>
+                </div>
+                <div class="col-12">
+                    <div class="border mt-4">
+                        <div class=" font-weight-bold text-center h6 py-2 mt-2" style="color: #288ad6 ">
+                            ƯU ĐÃI ĐẶC BIỆT
+
+                        </div>
+                        
+                        <small class=" border-bottom d-block pl-3 py-2 mt-2" style="color: #288ad6 ">
+                            Sản phẩm luôn được cập nhập <b>mới nhất</b>
+                        </small>
+                        <small class="border-bottom d-block pl-3 py-2 mt-2" style="color: #288ad6 ">
+                            Giao Miễn Phí Trong Nội Thành 63/63 Tỉnh
+                        </small>
+                        <small class=" border-bottom d-block pl-3 py-2 mt-2" style="color: #288ad6 ">
+                            Giao Gấp Trong Vòng 2 Giờ
+                        </small>
+                        <small class=" border-bottom d-block pl-3 py-2 mt-2" style="color: #288ad6 ">
+                            Cam Kết 100% Hoàn Lại Tiền Nếu Bạn Không Hài Lòng
+                        </small>
+                        <small class=" border-bottom d-block pl-3 py-2 mt-2" style="color: #288ad6 ">
+                            Cam Kết Hoa Tươi Trên 3 Ngày
+                        </small>
+
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="main-right-info">
+            @*<div class="location">
+            <a href="./index.html">TRANG CHỦ</a>
+            <span style="margin: 0 5px;">/</span>
+            <a href="#">HOA CỦA MẸ</a>
+        </div>*@
+            <h2 class="product-title">
+                @Model.Name
+            </h2>
+
+            <div class="price-wrapper">
+                <div class="price-sale"> @String.Format("{0:0,0₫}", Model.Price)</div>
+            </div>
+            <div class="col-6 bg-danger rounded-top"
+                 style="background: linear-gradient(to right,#e75a23 0,#bf081f 100%);">
+                <div class="text-light text-center font-weight-bold py-2 mt-2">
+                    GIÁ SỐC KHI MUA TẠI CỬA HÀNG
+
+                </div>
+            </div>
+            <div class="col-6 rounded-bottom" style="background:#eee">
+                <div class="text-center font-weight-bold py-2 mt-2 h4" style="color:#bf081f">
+                    @String.Format("{0:0,0₫}", Model.ProPrice)
+                </div>
+            </div>
+            <div class="is-divier">
+
+            </div>
+            <div style="color: #777">
+
+                @Html.Raw(Model.Detail)
+            </div>
+
+
+
+            <div class="mt-3" style="display : none">
+                <small class="text-secondary d-inline pr-3">Số lượng</small>
+
+                <div class="btn btn-white rounded-0 border tru" onclick="return Tru();"
+                     style="width:30px; height:30px;margin-top:-2px; line-height:15px;font-weight: bold;">
+                    -
+                </div>
+                <input type="number" style="width:50px; height:30px;margin:0 -6px;outline:0;text-align:center"
+                       class="rounded-0 border text-secondary etd pl-3 border-right-0" value="1" min="1"
+                       id="qtyDpt">
+                <div class="btn btn-white rounded-0 border cong" onclick="return Cong();"
+                     style="width:30px; height:30px;margin-top:-2px; line-height:15px;font-weight: bold;">
+                    +
+                </div>
+                <input type="text" name="count-xyz" style="display:none" value="@Model.Quantity" />
+                <small class="text-secondary d-inline ml-4">@Model.Quantity sản phẩm có sẵn</small>
+            </div>
+            <small style="color: #777" class=" d-inline">@Model.Quantity sản phẩm có sẵn</small>
+
+            <div class="cart">
+                <div class="nut-mua" id="buy-btn" data-id="@Model.ID">
+                    <button class="font-weight-bold text-uppercase" style="width:100%; border: none; border-radius: 10px; height:40px; background: #cc2121; color: white; font-size:14px">
+                        <i class="fas fa-cart-plus"></i>  Thêm vào giỏ
+                    </button>
+                </div>
+
+            </div>
+            @*<div class="">
+                <div class="" style="color: #777">
+                    @Html.Raw(Model.Description)
+                    <div class="commment-fb-cus">
+                        <div class="fb-comments" data-href="https://localhost:44370/@Model.ID" data-numposts="5" data-width="100%"></div>
+                    </div>
+                </div>
+
+            </div>*@
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<div class="promo-so1">
+    <div class="product">
+        <div class="container">
+            <div class="product__box">
+                <div class="product__box-content">
+                    <h2>SẢN PHẨM CÙNG LOẠI KHÁC</h2>
+
+                </div>
+                <div class="product__box-products">
+                    @foreach (var i in ViewBag.listOther)
+                    {
+                        <div class="product__box-products-item">
+                            <a class="product__box-products-item-img" href="~/@i.Slug">
+                                @if (i.Installment == 1)
+                                {
+
+                                }
+                                <img class="img-current" src="~/Public/images/products/@i.Image" alt="">
+                                <img class="img-new-small" src="~/Public/images/icon-new-small.png" alt="">
+
+                            </a>
+                            <div class="product__box-info-product">
+                                <a class="product__box-name-product" href="~/@i.Slug">
+                                    <span>
+                                        @i.Name
+                                    </span>
+                                </a>
+                                
+                                    <div class="product__box-info-product-price">
+                                        <span class="price-current">
+                                            @String.Format("{0:0,0₫}", i.Price)
+
+                                        </span>
+                                        <span class="price-sale">
+                                            @String.Format("{0:0,0₫}", i.ProPrice)
+
+                                        </span>
+                                    </div>
+                                </div>
+                            
+                            <div class="box-discount">
+                                
+                                    <span class="percent-discount">
+                                        -@String.Format("{0:0}", ((i.Price - i.ProPrice) / i.Price * 100))%
+                                    </span>
+                                </div>
+                            
+                        </div>
+
+
+
+                    }
+                </div>
+
+            </div>
+
+        </div>
+        <div class="container all-product">
+
+            <a rel="" href="~/san-pham">
+                <button>
+                    Xem thêm sản phẩm
+                </button>
+            </a>
+
+
+
+        </div>
+    </div>
+</div>
+<script>
+    function Cong() {
+        const num = parseInt($('.etd').val());
+        if (num < 99) {
+            $('.etd').val(num + 1);
+        }
+    }
+    function Tru() {
+        const num = parseInt($('.etd').val());
+        if (num > 1) {
+            $('.etd').val(num - 1);
+        }
+    }
+
+   
+</script>
+
