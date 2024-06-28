@@ -1,0 +1,156 @@
+﻿
+@{
+    
+    <link href="~/Public/images/Net.jpg" rel="shortcut icon" type="image/x-icon" />
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Đăng nhập quản trị hệ thống </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="~/Public/Admin/css/style.css" rel="stylesheet" />
+    <link href="~/Public/Admin/css/all.min.css" rel="stylesheet" />
+    <link href="~/Public/Admin/css/adminlte.min.css" rel="stylesheet" />
+    <link href="~/Public/Admin/css/font-sans.pro.css" rel="stylesheet" />
+    <link href="~/Public/Admin/css/toastr.min.css" rel="stylesheet" />
+    <style>
+        body {
+        }
+
+        .card-body h2 {
+            text-align: left;
+            font-size: 26px;
+            color: #414141;
+            padding-bottom: 20px
+        }
+
+        .login-box {
+            width: 500px;
+        }
+
+        .login-card-body {
+            padding: 40px !important
+        }
+
+        /*admin login*/
+        .input-group input {
+            display: block;
+            height: 50px;
+            width: 90%;
+            margin: 10px auto;
+            border: none;
+            border-bottom: 1px solid #ccc;
+            border-radius: 0
+        }
+
+            .input-group input::placeholder {
+                -webkit-transform: translateY(0px);
+                transform: translateY(0px);
+                -webkit-transition: .5s;
+                transition: .5s;
+            }
+
+            .input-group input:hover,
+            .input-group input:focus,
+            .input-group input:active:focus {
+                color: #ff5722;
+                outline: none;
+                border-bottom: 1px solid #ff5722;
+            }
+
+                .input-group input:hover::placeholder,
+                .input-group input:focus::placeholder,
+                .input-group input:active:focus::placeholder {
+                    color: #ff5722;
+                    position: relative;
+                    -webkit-transform: translateY(-20px);
+                    transform: translateY(-20px);
+                }
+
+
+
+
+        .icheck-primary {
+            display: flex;
+            align-items: center
+        }
+
+            .icheck-primary #remember {
+                margin-right: 5px
+            }
+
+            .icheck-primary label {
+                margin: 0;
+                color: #858585;
+                font-weight: 500 !important
+            }
+
+        .btn-login {
+            margin-top: 20px;
+            background-color: #ff5722 !important;
+            border-color: #ff5722 !important;
+            height: 50px
+        }
+
+            .btn-login:hover {
+                background-color: #C35617 !important
+            }
+    </style>
+</head>
+<body class="hold-transition login-page">
+    <div class="h-100 w-100 position-absolute" style="background-image:url(../../../../Public/Admin/images/bglogin.jpg);background-size: cover;object-fit:cover; background-repeat:no-repeat;z-index:-1; opacity:1"></div>
+    <div class="overlay justify-content-center align-items-center d-none bg-secondary w-100 h-100 position-absolute" style="z-index:1; opacity:.3"><i class="fas fa-2x fa-sync fa-spin"></i></div>
+    <div class="login-box">
+        <div class="login-logo">
+        </div>
+        <div class="card">
+            <div class="card-body login-card-body rounded">
+                <h2 class="text-dark text-uppercase" style="text-align:center">đăng nhập quản trị hệ thống</h2>
+
+                <form method="POST">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="USERNAME" name="username" value="admin">
+                        @*<div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
+                            </div>*@
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" placeholder="PASSWORD" name="password" value="1">
+                        @*<div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lock"></span>
+                                </div>
+                            </div>*@
+                    </div>
+                    <div class="icheck-primary">
+                        <input type="checkbox" id="remember">
+                        <label for="remember">
+                            <small class="font-weight-bold">GHI NHỚ</small>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn-login btn btn-primary btn-block" id="btn-login">ĐĂNG NHẬP</button>
+                </form>
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <script src="~/Public/Admin/js/jquery.min.js"></script>
+    <script src="~/Public/Admin/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Public/Admin/js/toastr.min.js"></script>
+    <script src="~/Public/Admin/js/adminlte.min.js"></script>
+    <script src="~/Public/Admin/js/karma.laclac.min.js"></script>
+
+</body>
+</html>
+
