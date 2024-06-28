@@ -1,0 +1,215 @@
+﻿
+@{ ViewBag.Title = "Quản trị Admin";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml"; }
+@{ int role = Convert.ToInt32(Session["Admin_Role"]); }
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark"></h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#"></a></li>
+
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-info">
+
+                    <div class="icon">
+                        <i class="ion ion-bag"></i>
+                    </div>
+                    <a href="~/Admin/Order/Index" class="small-box-footer" target="_blank">
+                        <div class="inner">
+                            <div class="inner-icon">
+                                <i style="color: blueviolet" class="fa-solid fa-cart-plus"></i>
+                            </div>
+                            <div class="inner-info">
+                                <h3>@ViewBag.CountOrderCancel</h3>
+                                <p>Đơn đặt hàng mới</p>
+                            </div>
+
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-success">
+
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                    <a href="~/Admin/Order/Index" class="small-box-footer" target="_blank">
+                        <div class="inner">
+                            <div class="inner-icon">
+                                <i style="color: #00FF00" class="fa-solid fa-circle-check"></i>
+                            </div>
+                            <div class="inner-info">
+
+                                <h3>@ViewBag.CountOrderSuccess<sup style="font-size: 20px"></sup></h3>
+
+                                <p>Đơn hàng đã hoàn thành</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            @if (role == 1)
+            {
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-warning">
+
+                        <div class="icon">
+                            <i class="ion ion-person-add"></i>
+                        </div>
+                        <a href="~/Admin/User/Index" class="small-box-footer" target="_blank">
+                            <div class="inner">
+                                <div class="inner-icon">
+                                    <i style="color: orange" class="fa-solid fa-users"></i>
+                                </div>
+                                <div class="inner-info">
+                                    <h3>@ViewBag.CountUser</h3>
+                                    <p>Thành viên</p>
+                                </div>
+                            </div>
+
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-danger">
+
+                        <div class="icon">
+                            <i class="ion ion-pie-graph"></i>
+                        </div>
+                        <a href="~/Admin/Contact/Index" class="small-box-footer" target="_blank">
+
+                            <div class="inner">
+                                <div class="inner-icon">
+                                    <i style="color: #EE0000" class="fa-solid fa-phone-slash"></i>
+                                </div>
+                                <div class="inner-info">
+
+                                    <h3>@ViewBag.CountContactDoneReply</h3>
+                                    <p>Liên hệ chưa trả lời</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>}
+            else { }
+
+            @*<div class="col-lg-3 col-6">
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <div class="inner-icon">
+                        <i style="color: #33CC99 " class="fa-solid fa-money-check-dollar"></i>
+                    </div>
+                    <div class="inner-info">
+
+                        <h3>@ViewBag.Total VND</h3>
+                        <p>Tổng doanh thu</p>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>*@
+        </div>
+    </div>
+</section>
+
+<h2 style="text-align:center;"> Thống kê doanh thu tháng @ViewBag.ThisMonth năm @ViewBag.ThisYear</h2>
+<h3 style="text-align:center;">Shop đã bán được <small style="color:red;">@String.Format("{0:0,0₫}", @ViewBag.TongDoanhThu)</small></h3>
+<div id="piechart" style="width:30%;float:left;height:380px"></div>
+<div id="chart_div" style="width: 70%;float: left; height: 380px;overflow-x: auto;white-space: nowrap;"></div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    // Load google charts
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    // Draw the chart and set the chart values
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Task', 'Tình Trạng'],
+            ['Thành công', @ViewBag.countOrderSuccessThisMouth],
+            ['Đã hủy', @ViewBag.countOrderCancelThisMouth],
+            ['Đang chờ', @ViewBag.countOrderWaitingThisMouth],
+            ['Đang gửi', @ViewBag.countOrderSendingThisMouth]
+        ]);
+
+        var options = { 'title': 'Trạng thái'};
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+    }
+</script>
+<script type="text/javascript">
+    google.charts.load('current', { 'packages': ['bar'] });
+    google.charts.setOnLoadCallback(drawStuff);
+
+    function drawStuff() {
+
+        var d = [['Ngày', 'Doanh Thu']];
+        var yourJavaScriptArray = @Html.Raw(Json.Encode(@ViewBag.dataBarChar));
+        for (var i = 0; i < yourJavaScriptArray.length; i++) {
+            var j = i;
+            var a = ['Ngày' + (i+1), yourJavaScriptArray[i]];
+            d.push(a);
+        }
+
+        var data = new google.visualization.arrayToDataTable(d);
+
+        var options = {
+            title: 'Thống kê theo ngày !',
+
+        legend: { position: 'none' },
+        chart: {
+            title: 'Thống kê theo ngày !',
+            subtitle: ''
+        },
+            bars: 'vertical', // Required for Material Bar Charts.
+        axes: {
+            x: {
+                0: { side: 'bottom', label: '' } // Top x-axis.
+            }
+        },
+        bar: { groupWidth: "100%" }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    };
+</script>
+
+
+
+@*<script>
+        $(document).ready(function () {
+            setTimeout(function () {
+                toastr.options = {
+                    closeButton: true,
+                    progressBar: true,
+                    showMethod: 'slideDown',
+                    timeOut: 4000
+                };
+                toastr.success('@Session["Admin_Name"]', 'Xin chào Quản trị viên');
+
+            }, 1300);
+        });
+    </script>*@
+
+
+
