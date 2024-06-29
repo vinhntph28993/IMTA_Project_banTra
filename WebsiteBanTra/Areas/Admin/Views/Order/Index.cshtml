@@ -1,0 +1,145 @@
+﻿@model IEnumerable<WebsiteBanTraiCay.Models.ListOrder>
+
+@{
+    ViewBag.Title = "Danh sách đơn hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@Html.Partial("_MessageAlert")
+<section class="content py-2">
+    <div class="container-fluid">
+        <!--Content-->
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-8">
+                        <h5 class="text-csm">@ViewBag.Title</h5>
+                    </div>
+                    <div class="col-4">
+                        <div class="float-right pt-1">
+                            <button type="button" class="btn btn-danger btn-sm">
+                                <a href="~/Admin/Order/Trash" class="text-white"><i class="far fa-trash-alt fa-xs"></i>&nbsp; Đơn hàng đã hủy(@(ViewBag.countTrash ?? "?"))</a>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <table id="cate1" class="table table-bordered table-hover" style="font-size:15px">
+                    <thead>
+                        <tr>
+                            <th class="text-center no-sort text-dark" style="width:3rem;">#</th>
+                            <th class="text-primama"> Khách hàng </th>
+                            <th class="no-sort text-primama text-center">Trạng thái</th>
+                            <th class="text-primama text-right">Tổng tiền</th>
+                            <th class="text-primama text-center">Thanh toán</th>
+                            <th class="text-primama">Ngày Đặt</th>
+                            <th class="text-primama">Ngày Giao Hàng</th>
+                            <th class="no-sort text-primama" style="width:180px">Action</th>
+                            <th class="no-sort text-primama" style="width:180px">Chi tiết</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var c in Model)
+                        {
+                            <tr>
+                                <td class="text-center">
+                                    @c.ID
+                                </td>
+                                <td>
+                                    <a href="">
+                                        @c.CustomerName
+                                    </a>
+                                </td>
+                                <td class='text-center'>
+                                    @if (c.Status == 0)
+                                    {
+                                        <small class="badge badge-danger ba@(c.ID)">Đã hủy</small>
+                                    }
+                                    else if (c.Status == 3)
+                                    {
+                                        <small class="badge badge-success ba@(c.ID)">Đã giao hàng</small>
+                                    }
+                                    else if (c.Status == 1)
+                                    {
+                                        <small class="badge badge-secondary ba@(c.ID)"> Đang xử lý</small>
+                                    }
+                                    else if (c.Status == 2)
+                                    {
+                                        <small class="badge badge-info ba@(c.ID)">Đang giao hàng</small>
+                                    }
+
+                                </td>
+                                <td class="text-right">
+                                    @String.Format("{0:0,0₫}", c.SAmount)
+                                </td>
+                                <td>
+                                    @if (c.IsPayment == true)
+                                    {
+                                        <span>Đã thanh toán</span>
+                                    }
+                                    else
+                                    {
+                                        <span>
+                                            Thanh toán khi nhận hàng
+                                        </span>
+                                    }
+                                </td>
+                                <td>
+                                    @c.CreateDate
+                                </td>
+                                <td class="export-date@(c.ID)">
+                                    @c.ExportDate
+                                </td>
+                                <td class="text-center">
+                                    @if (c.Status == 1)
+                                    {
+                                        <form method="post" action="/Order/changeStatus">
+                                            <input type="hidden" name="idorder" value="@c.ID" />
+                                            <input type="hidden" name="statusorrder" value="2" />
+                                            <button type="submit" class="btn btn-primary">
+                                                Đang giao hàng
+                                            </button>
+                                        </form>
+                                    }
+                                    else if (c.Status == 2)
+                                    {
+                                        <form method="post" action="/Order/changeStatus">
+                                            <input type="hidden" name="idorder" value="@c.ID" />
+                                            <input type="hidden" name="statusorrder" value="3" />
+                                            <button type="submit" class="btn btn-primary">
+                                                Đã giao hàng
+                                            </button>
+                                        </form>
+                                    }
+                                    else
+                {
+                    <p>Hoàn thành</p>
+                }
+                                   
+                                </td>
+                                <td>
+                                    <button type="button" style="background:#5bc0de" class="btn btn-sm px-3" data-toggle="tooltip" data-placement="top" title="Chi tiết đơn hàng">
+                                        <a href="~/admin/order/details/@c.ID" class="text-white">
+                                            <i class="far fa-eye"></i>
+                                        </a>
+                                    </button>
+                                </td>
+                            </tr>
+}
+                    </tbody>
+
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</section>
+<style>
+    .text-primama {
+        color: #1e91cf;
+    }
+</style>
+
