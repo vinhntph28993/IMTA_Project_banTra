@@ -1,0 +1,215 @@
+﻿@model IEnumerable<WebsiteBanTraiCay.Models.MCategory>
+@{
+    ViewBag.Title = @ViewBag.Configs.Name ;
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+@*<div class="home-slider bg-" style="background:#f3f3f3">
+    @Html.Action("Categories", "Module")
+</div>*@
+<div class="home-slider bg-" >
+    @Html.Action("HomeSlideShow", "Module")
+</div>
+<div class="promo-so">
+    <div class="product">
+        <div class="container">
+            <div class="product__box">
+                <div class="product__box-content">
+                    <h2>Sản Phẩm Khuyến Mãi</h2>
+
+                </div>
+                <div class="product__box-products">
+                    @foreach (var p in ViewBag.PromotionProduct)
+                    {
+                        <div class="product__box-products-item">
+                            <a class="product__box-products-item-img" href="@p.Slug">
+                                @if (p.Installment == 1)
+                                {
+
+                                }
+                                <img class="img-current" src="~/Public/images/products/@p.ImageList" alt="">
+                            </a>
+                            <div class="product__box-info-product">
+                                <a class="product__box-name-product" href="@p.Slug">
+                                    <span>
+                                        @p.Name
+                                    </span>
+                                </a>
+                                <div class="product__box-info-product-price">
+                                    <span class="price-current">
+                                        @String.Format("{0:0,0₫}", p.Price)
+
+                                    </span>
+                                    <span class="price-sale">
+                                        @String.Format("{0:0,0₫}", p.ProPrice)
+
+                                    </span>
+                                </div>
+                            </div>
+                            @*<div class="add-product-box">
+                                <div class="add-product">
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                </div>
+                            </div>*@
+                            <div class="box-discount">
+                                <span class="percent-discount">
+                                    -@String.Format("{0:0}", ((p.Price - p.ProPrice) / p.Price * 100))%
+                                </span>
+
+                            </div>
+                        </div>
+
+
+
+                    }
+                </div>
+
+            </div>
+
+        </div>
+        <div class="container all-product">
+            <a rel="" href="~/product">
+                <button>
+                    Xem thêm sản phẩm
+                </button>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+<div class="promo-so1">
+    <div class="product">
+        <div class="container">
+            <div class="product__box">
+                <div class="product__box-content">
+                    <h2>Sản Phẩm Mới</h2>
+
+                </div>
+                <div class="product__box-products">
+                    @foreach (var p in ViewBag.NewProduct)
+                    {
+                        <div class="product__box-products-item">
+                            <a class="product__box-products-item-img" href="@p.Slug">
+                                @if (p.Installment == 1)
+                                {
+
+                                }
+                                <img class="img-current" src="~/Public/images/products/@p.ImageList" alt="">
+                                <img class="img-new-small" src="~/Public/images/icon-new-small.png" alt="">
+
+                            </a>
+                            <div class="product__box-info-product">
+                                <a class="product__box-name-product" href="@p.Slug">
+                                    <span>
+                                        @p.Name
+                                    </span>
+                                </a>
+                                <div class="product__box-info-product-price">
+                                    <span class="price-current">
+                                        @String.Format("{0:0,0₫}", p.Price)
+
+                                    </span>
+                                    <span class="price-sale">
+                                        @String.Format("{0:0,0₫}", p.ProPrice)
+
+                                    </span>
+                                </div>
+                            </div>
+                            @*<div class="add-product-box">
+                                <div class="add-product">
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                </div>
+                            </div>*@
+                            <div class="box-discount">
+                                <span class="percent-discount">
+                                    -@String.Format("{0:0}", ((p.Price - p.ProPrice) / p.Price * 100))%
+                                </span>
+
+                            </div>
+                        </div>
+
+
+
+                    }
+                </div>
+
+            </div>
+
+        </div>
+        <div class="container all-product">
+
+            <a rel="" href="~/product">
+                <button>
+                    Xem thêm sản phẩm
+                </button>
+            </a>
+
+
+
+        </div>
+    </div>
+</div>
+<div class="prohome">
+    @foreach (var cat in Model)
+    {
+        <div class="product">
+
+            <div class="container">
+                <div class="product__box">
+                    <div class="product__box-content">
+                        <h2 style="color: #000000 ">@cat.Name</h2>
+
+                    </div>
+                     @Html.Action("ProductHome", "Site", new { catid = cat.ID })
+
+                </div>
+
+            </div>
+            
+            <div class="container all-product">
+                <a rel="" href="~/@cat.Slug">
+                    <button>
+                        Xem thêm sản phẩm
+                    </button>
+                </a>
+            </div>
+        </div>
+    }
+    </div>
+
+@*<div class="tab-products">
+    <div class="container-91">
+        <div class="title">Sản phẩm theo danh mục</div>
+        <div class="tab-tab-tab">
+
+            <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                @{ var i = 0;}
+                @foreach (var cat in Model)
+                {
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link @(i == 0 ? "active" : "")" id="tab-tab-@cat.ID" data-toggle="pill" href="#tab-@cat.ID" role="tab"
+                            aria-controls="tab-tab-tab-@cat.ID" aria-selected="true">@cat.Name</a>
+                    </li>
+                    i++;
+                }
+            </ul>
+
+            <div class="tab-content" id="pills-tabContent">
+                @{ i = 0;}
+                @foreach (var cat in Model)
+                {
+                    <div class="tab-pane fade show @(i == 0 ? "active" : "") " id="tab-@cat.ID" role="tabpanel" aria-labelledby="tab-tab-@cat.ID">
+                        @Html.Action("ProductHome", "Site", new { catid = cat.ID })
+                    </div>
+                    i++;
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="news-home" style="background:#f3f3f3">
+    @Html.Action("NewsHome", "Module")
+</div>
+@Html.Action("Popu", "Module")*@
+
+

@@ -1,0 +1,453 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<WebsiteBanTraiCay.Models.MProduct>
+@{
+    ViewBag.Title = "Kết quả tìm kiếm: " + (ViewBag.Count > 0 ? "Có " + ViewBag.Count + " kết quả phù hợp" : "Không tìm thấy kết quả phù hợp");
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+<style>
+    :root {
+        --primary-color: #cc2121;
+    }
+
+    .product {
+        margin-top: 141px;
+    }
+
+    .shop-page {
+        width: 100%;
+        min-height: 60px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 20px;
+    }
+
+    .shop-page-left {
+        font-size: 18px;
+    }
+
+        .shop-page-left a {
+            text-decoration: none;
+            color: rgba(102,102,102,0.7);
+        }
+
+        .shop-page-left .divider {
+            margin: 0 5px;
+            color: rgba(102,102,102,0.7);
+        }
+
+        .shop-page-left .shop {
+            color: #222;
+            text-transform: uppercase;
+        }
+
+
+
+    .shop-page-right .span-title {
+        font-size: 16px;
+        margin-right: 16px;
+    }
+
+    .shop-page-right .select {
+        border: 1px solid #ccc;
+        outline: none;
+        box-shadow: 0 0 6px #ccc;
+        min-width: 200px;
+        min-height: 39px;
+        font-size: 15px;
+        padding: 0 10px;
+    }
+
+        .shop-page-right .select:hover {
+            box-shadow: none;
+        }
+
+    .main {
+        width: 100%;
+        padding: 30px 0;
+    }
+
+    .container {
+        height: 100%;
+    }
+
+    .main-left {
+        width: 25%;
+        padding: 0 15px 30px 0;
+    }
+
+
+    .main-right {
+        width: 75%;
+        padding: 0 15px 30px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .shop-sidebar aside {
+        width: 100%;
+        padding: 5px;
+        box-shadow: 0px 0px 5px 0px rgb(0 0 0 / 10%)
+    }
+
+    .nav-menu, .nav-product {
+        width: 100%;
+        margin-bottom: 24px;
+    }
+
+    .nav-menu-title {
+        width: 100%;
+        padding: 15px 20px;
+        text-align: left;
+        letter-spacing: 1px;
+        font-size: 16px;
+        color: white;
+        font-weight: 500;
+        background-color: var(--primary-color);
+    }
+
+    .menu-content-list, .product_list_widget-list {
+        list-style: none;
+        margin-top: 5px;
+    }
+
+    .product_list_widget-list {
+        height: 400px;
+        overflow: hidden;
+    }
+
+    .shop-sidebar ul li:nth-child(odd) {
+        background-color: #fafafa;
+    }
+
+    .menu-content-items {
+        padding: 5px 20px;
+        line-height: 35px;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+    }
+
+        .menu-content-items a {
+            color: #555;
+            text-decoration: none;
+            transition: 0.2s
+        }
+
+            .menu-content-items a:hover {
+                color: var(--primary-color)
+            }
+
+    .list_widget-items a {
+        text-decoration: none;
+        font-size: 14px;
+        color: #555;
+        font-weight: 500;
+        padding: 5px 0;
+    }
+
+    .menu-content-items:hover {
+        color: var(--primary-color);
+    }
+
+    .img-product {
+        width: 60px;
+        height: 60px;
+    }
+
+    .list_widget-items {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        padding: 10px;
+        line-height: 20px;
+    }
+
+        .list_widget-items:hover .info-product a {
+            color: var(--primary-color);
+        }
+
+
+    .price {
+        display: flex;
+        font-size: 14px;
+    }
+
+    .price-old, .price-new {
+        margin-right: 5px;
+        color: var(--primary-color);
+    }
+
+    .price-new {
+        font-weight: 500;
+    }
+
+    .price-old {
+        opacity: 0.6;
+        text-decoration: line-through;
+    }
+
+    .img-product img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .main-right-product {
+        width: 25%;
+        height: 273px;
+        padding: 0 10px;
+        margin-top: 20px;
+        position: relative;
+    }
+
+    .product__box-products-item-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+
+    .img-current {
+        width: 80%;
+        height: 80%;
+        object-fit: cover;
+        object-position: center;
+        transform: scale(1);
+        transition-duration: .4s;
+        object-fit: scale-down;
+    }
+
+    .main-right-product .img-new-small {
+        position: absolute;
+        top: -4px;
+        right: -7px;
+        width: 80px;
+        height: 45px
+    }
+
+    .main-right-product:hover .add-product-box {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .main-right-product:hover .img-hover {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .main-right .add-product {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        cursor: pointer;
+        border: 2px solid #ccc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        transition: 0.5s;
+    }
+
+    .main-right .product__box-products-item-img {
+        display: block;
+        position: relative;
+        height: 200px;
+        background: white;
+    }
+
+    .hideDiscount {
+        display: none;
+    }
+    /* box discount */
+    .box-discount {
+        width: 40px;
+        height: 40px;
+        background: black;
+        border-radius: 50%;
+        position: absolute;
+        top: 13px;
+        left: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white
+    }
+
+    .product__box-name-product {
+        font-size: 14px;
+        color: #111;
+        display: block;
+        font-weight: 500;
+        padding: 4px 10px 0 10px;
+        text-align: center;
+        text-decoration: none;
+    }
+
+        .product__box-name-product span {
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            overflow: hidden;
+            display: -webkit-box;
+            color: #555;
+            transition: .3s;
+        }
+
+        .product__box-name-product:hover {
+            text-decoration: none !important;
+        }
+
+        .product__box-name-product span:hover {
+            color: var(--primary-color);
+        }
+
+    .product__box-info-product-price {
+        margin: 4px 0;
+        padding: 0 10px;
+        text-align: center
+    }
+
+    .product__box-info-product {
+        border-top: 1px solid #ccc;
+    }
+
+    .price-current {
+        font-size: 14px;
+        padding-right: 5px;
+        color: var(--primary-color);
+        opacity: 0.6;
+        text-decoration: line-through;
+    }
+
+    .price-sale {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--primary-color);
+    }
+
+    .percent-discount {
+        font-size: 13px;
+        font-weight: bold
+    }
+
+    /*  .product__box-products-item-img .img-current:hover {
+            transform: scale(1.2);
+            transition-duration: .4s;
+            object-fit: scale-down;
+        }*/
+    .shop-page-left {
+        font-size: 18px;
+    }
+
+        .shop-page-left a {
+            text-decoration: none;
+            color: rgba(102,102,102,0.7);
+        }
+
+        .shop-page-left .divider {
+            margin: 0 5px;
+            color: rgba(102,102,102,0.7);
+        }
+
+        .shop-page-left .shop {
+            font-weight: bold;
+            color: #222;
+            text-transform: uppercase;
+        }
+
+
+</style>
+
+<div style="clear:both"></div>
+<div class="main">
+    <div class="container py-3 shop-page-left" style="justify-content: normal">
+        
+        <a href="/">TRANG CHỦ</a>
+        <span class="divider">/</span>
+        <span class="shop text-uppercase"> <a href="~/san-pham" style="color: #111">Tìm thấy <b class="d-inline">@ViewBag.Count</b> kết quả phù hợp</a></span>
+    </div>
+    <div class="container" style="align-items: normal !important">
+        <div class="main-left">
+
+            @Html.Action("Categories", "Module")
+
+
+
+
+        </div>
+        <div class=" main-right">
+
+
+            @if (Model.Count() == 0)
+            {
+                <div class="container-91 bg-white mb-3" style="background: #fff;min-height:300px">
+                    <div class="py-3">
+                        <small class="font-weight-bold ml-3">
+                            Không tìm thấy kết quả phù hợp
+                        </small>
+                    </div>
+                    <div class="my-3">
+                        <small class="font-weight-bold ml-3"> Để tìm thấy kết quả chính xác hơn bạn vui lòng:</small>
+                        <ul class="list-unstyled">
+                            <li class="ml-4"><small class="font-weight-bold ml-3">- Kiểm tra lại lỗi chính tả.</small></li>
+                            <li class="ml-4"><small class="font-weight-bold ml-3">- Thử lại với từ khóa khác.</small></li>
+                        </ul>
+                    </div>
+                </div>
+            }
+            else
+            {
+
+                foreach (var row in Model)
+                {
+                    <div class="main-right-product">
+                        <div style="border: 1px solid #ccc">
+                            <a class="product__box-products-item-img" href="~/@row.Slug">
+                                <img class="img-current" src="~/Public/images/products/@row.Image" alt="">
+                                <img class="img-new-small" src="/Public/images/icon-new-small.png" alt="">
+                            </a>
+                            <div class="product__box-info-product">
+                                <a class="product__box-name-product" href="~/@row.Slug">
+                                    <span>@row.Name</span>
+                                </a>
+                                <div class="product__box-info-product-price">
+                                    <span class="price-current">
+                                        @String.Format("{0:0,0₫}", row.Price)
+                                    </span>
+                                    <span class="price-sale">
+                                        @String.Format("{0:0,0₫}", row.ProPrice)
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="box-discount">
+                                <span class="percent-discount">
+                                    -@String.Format("{0:0}", ((row.Price - row.ProPrice) / row.Price * 100))%
+                                </span>
+
+                            </div>
+                        </div>
+
+                    </div>
+                }
+
+            }
+
+
+            <div class="col-12 pagination-91 py-3">
+                @Html.PagedListPager(Model, page => Url.Action("Search", new { key = Session["keywords"], page }))
+
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+<div style="clear:both"></div>
+
+
+
