@@ -1,0 +1,90 @@
+﻿@model WebsiteBanTraiCay.Models.MConfig
+
+@{
+    ViewBag.Title = "Tạo mới cấu hình Website";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@Html.Partial("_MessageAlert")
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <section class="content py-2">
+        <div class="container-fluid">
+            <!--Content-->
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-8">
+                            <h5 class="text-csm">@ViewBag.Title</h5>
+                        </div>
+                        <div class="col-4">
+                            <div class="float-right pt-1">
+                                <button type="submit" class="btn btn-primary btn-sm">
+                                    <i class="fas fa-save"></i>&nbsp; Save
+                                </button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <div class="form-group">
+                                <label><strong class="input">Tên của bạn(<span class="text-danger">*</span>)</strong></label>
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label><strong class="input">SĐT của bạn(<span class="text-danger">*</span>)</strong></label>
+                                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label><strong class="input">SĐT 2 của bạn(<span class="text-danger">*</span>)</strong></label>
+                                @Html.EditorFor(model => model.Phone_1, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Phone_1, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label><strong class="input">Mã TalkTo(<span class="text-danger">*</span>)</strong></label>
+                                @Html.EditorFor(model => model.APITalkTo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.APITalkTo, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label><strong class="input">Hotline Zalo(<span class="text-danger">*</span>)</strong></label>
+                                @Html.EditorFor(model => model.Zalo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Zalo, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label><strong class="input">Mã Mess Facebook(<span class="text-danger">*</span>)</strong></label>
+                                @Html.EditorFor(model => model.MessFacebook, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.MessFacebook, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label><strong class="input">Địa chỉ của bạn(<span class="text-danger">*</span>)</strong></label>
+                                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label><strong class="input">Gmail của bạn(<span class="text-danger">*</span>)</strong></label>
+                                @Html.EditorFor(model => model.Gmail, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Gmail, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
