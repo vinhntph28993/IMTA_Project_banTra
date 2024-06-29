@@ -1,0 +1,74 @@
+﻿@model IEnumerable<WebsiteBanTraiCay.Models.MCategory>
+    
+<style>
+    .menu-content-items {
+        position: relative
+    }
+
+        .menu-content-items:hover .menu-content-list-nav {
+            opacity: 1;
+            visibility: visible
+        }
+
+    .menu-content-list-nav {
+        box-shadow: 0px 0px 5px 0px rgb(0 0 0 / 17%);
+        position: absolute;
+        width: 300px;
+        min-height: 100px;
+        top: 0;
+        left: 259px;
+        z-index: 99999;
+        background: white;
+        list-style: none;
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.2s all ease
+    }
+
+        .menu-content-list-nav li {
+            padding: 0 20px
+        }
+
+            .menu-content-list-nav li a {
+                color: #555
+            }
+</style>
+<div class="shop-sidebar">
+    <aside class="nav-menu">
+        <p class="nav-menu-title" style="margin: 0">
+            DANH MỤC SẢN PHẨM
+        </p>
+        <div class="nav-menu-content">
+            <ul class="menu-content-list">
+                <li class="menu-content-items"> <a href="~/product"> Tất cả sản phẩm</a></li>
+
+                @{int i = 1; }
+                @foreach (var c in Model@*.Take(12)*@)
+{
+if (c.ParentID == 0)
+{
+            <li class="menu-content-items">
+                <a href="~/@c.Slug">@c.Name</a>
+                @*<ul class="menu-content-list-nav">
+                    @foreach (var d in Model)
+                    {
+                        if (c.ID == d.ParentID)
+                        {
+                            <li>
+                                <a href="~/@d.Slug" class="">@d.Name</a>
+                            </li>
+                        }
+                    }
+                </ul>*@
+            </li>
+
+        }
+    }
+
+            </ul>
+
+        </div>
+    </aside>
+
+
+</div>

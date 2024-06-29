@@ -1,0 +1,127 @@
+﻿@model IEnumerable<WebsiteBanTraiCay.Models.MPost> 
+<head>
+    <link href="~/Public/css/styleContent.css" rel="stylesheet" />
+</head>
+<div class="row clearfix">
+    @*<div class="col-sm-3 p-0 m-0">
+            @Html.Action("Categories", "Module")
+        </div>*@
+    <div class="col-sm-12">
+        @Html.Action("SlideShow", "Module")
+    </div>
+        @*<div class="col-sm-2">
+            <div class="exp-news">
+                <div class="pl-2 py-2 border-bottom border-light">
+                    <div class="fb-like" data-href="https://www.facebook.com/Gia-D%E1%BB%A5ng-R%E1%BA%BB-Gia-Lai-108487101091890" data-width="" data-layout="button_count" data-action="like" data-size="small" data-share="true"></div>
+                </div>
+                <div class="title text-dark font-weight-bold">
+                    <a href="~/tin-tuc" class="text-dark text-decoration-none">TIN TỨC NỔI BẬT - MỚI NHẤT</a> <i class="fas fa-caret-right"></i>
+                </div>
+
+                @foreach (var u in Model)
+                {
+            <div class="des-exp">
+
+                <a href="~/@u.Slug" class="text-dark text-decoration-none">
+
+                    @u.Title
+                </a>
+            </div>
+                }
+            <div class="mb-4"></div>
+                @foreach (var t in ViewBag.Slider)
+                {
+                    <div class="my-1 pl-2">
+                        <a href="@t.Url" class="my-5"><img src="~/Public/images/sliders/@t.Image" alt="@t.Name"></a>
+                    </div>
+                }
+            </div>
+        </div>*@
+</div>
+<!--Selection-content-->
+<div class=" selection-content">
+    <div class="selection-content__banner container">
+        <div class="selection-content__banner-item">
+            <img src="~/Public/images/banners/web-campain-06-1024x1024.jpg" alt="">
+            <div class="selection__text-content">
+
+                <a class="button" href="~/product">
+                    <span class="button__buy">Mua Ngay</span>
+                    <span class="button__divider"></span>
+                </a>
+            </div>
+        </div>
+        <div class="selection-content__banner-item">
+            <img src="~/Public/images/banners/web-campain-07-1024x1024.jpg"  width="90%" alt="">
+            <div class="selection__text-content">
+ 
+                <a class="button" href="~/product">
+                    <span class="button__buy">Mua Ngay</span>
+                    <span class="button__divider"></span>
+                </a>
+            </div>
+
+        </div>
+        <div class="selection-content__banner-item">
+            <img src="~/Public/images/banners/web-campain-09-1024x1024.jpg" alt="">
+            <div class="selection__text-content">
+      
+                <a class="button" href="~/product">
+                    <span class="button__buy">Mua Ngay</span>
+                    <span class="button__divider"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!--Policy-->
+<div class="policy">
+    <div class="policy__box container">
+        <div class="policy__box-item">
+            <div class="policy__box-img">
+                <img src="~/Public/images/free_shipping.png" alt="">
+            </div>
+            <div class="policy__box-box">
+                <div class="policy__box-content">
+                    <p>MIỄN PHÍ VẬN CHUYỂN</p>
+                    <p>Miễn Phí Tất Cả Đơn Hàng</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="policy__box-item">
+            <div class="policy__box-img">
+                <img src="~/Public/images/support247.png" alt="">
+            </div>
+            <div class="policy__box-box">
+                <div class="policy__box-content">
+                    <p>HỖ TRỢ 24/7</p>
+                    <p> Hỗ trợ 24 Giờ Một Ngày</p>
+                </div>
+            </div>
+        </div>
+        <div class="policy__box-item">
+            <div class="policy__box-img">
+                <img src="~/Public/images/money_back.png" alt="">
+            </div>
+            <div class="policy__box-box">
+                <div class="policy__box-content">
+                    <p>HOÀN TIỀN</p>
+                    <p>Hoàn Tiền Trong 30 Ngày</p>
+                </div>
+            </div>
+        </div>
+        <div class="policy__box-item">
+            <div class="policy__box-img">
+                <img src="~/Public/images/promotions.png" alt="">
+            </div>
+            <div class="policy__box-box">
+                <div class="policy__box-content">
+                    <p>GIẢM GIÁ</p>
+                    <p>Với Đơn Hàng Trên 1 Triệu</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

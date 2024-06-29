@@ -1,0 +1,86 @@
+﻿@model IEnumerable<WebsiteBanTraiCay.Models.MMenu>
+<footer class="" style=" background: #ffe6dd ">
+    <div class="row container-91" style="padding: 30px 0">
+        <div class="col-3">
+            <div class="title text-uppercase font-weight-bold">Về chúng tôi</div>
+            @foreach (var config in ViewBag.Config)
+            {
+                <a href="javascript:void(0)" class="ll text-decoration-none text-dark" style="display:flex; align-items:center "> <i class="fa-solid fa-location-dot"></i> <span class="" style="margin-left: 10px"><b>Địa chỉ:</b> @config.Address</span></a>
+                <a href="javascript:void(0)" class="ll text-decoration-none text-dark" style="display: flex; align-items: center"> <i class="fa-solid fa-phone"></i> <span class="" style="margin-left: 10px"><b>SĐT:</b> @string.Format("0{0:#### ### ###}", Convert.ToInt64(config.Phone)) (8:30 - 17:00)</span></a>
+                <a href="javascript:void(0)" class="ll text-decoration-none text-dark" style="display: flex; align-items: center"> <i class="fa-solid fa-envelope"></i> <span class="" style="margin-left: 10px"><b>Email:</b> @config.Gmail</span></a>
+            }
+
+        </div>
+
+        <div class="col-3">
+            <div class="title  font-weight-bold">LIÊN LẠC VỚI CHÚNG TÔI</div>
+            @foreach (var config in ViewBag.Config)
+            {
+                <a href="javascript:void(0)" class="ll text-decoration-none text-dark"> Đặt hàng: <b>@string.Format("0{0:#### ### ###}", Convert.ToInt64(config.Phone)) </b></a>
+                <a href="javascript:void(0)" class="ll text-decoration-none text-dark"> Hotline 24/7: <b>@string.Format("0{0:#### ### ###}", Convert.ToInt64(config.Phone_1))</b></a>
+
+            }
+
+
+
+        </div>
+        <div class="col-3">
+            <div class="title font-weight-bold">KHÁCH HÀNG</div>
+            @foreach (var page in ViewBag.Page)
+            {
+                <a href="@page.Slug" class="ll text-decoration-none text-dark" style="display:flex; align-items:center ">  <span class="">@page.Title</span></a>
+            }
+
+
+
+        </div>
+        <div class="col-md-3">
+            <div class="title text-uppercase font-weight-bold">KẾT NỐI VỚI CHÚNG TÔI</div>
+            @Html.Action("ListPage","Module")            
+
+        </div>
+    </div>
+
+</footer>
+<link href="~/Public/css/stylecontact.css" rel="stylesheet" />
+<div class="box_fixRight2">
+    <div class="box_content2">
+
+    </div>
+</div>
+<script type="text/javascript">
+    var abc = $('.box_content2');
+    $(window).scroll(function () {
+        abc.css("opacity", 1 - $(window).scrollTop() / $(document).height() * 2);
+
+        if ($(window).scrollTop() + $(window).height() > $(document).height() - 500) {
+            abc.fadeTo(1000, 1);
+        }
+        else if ($(window).scrollTop + $(window).height() == $(document).height() - 500) {
+            abc.css("opacity", 1 - $(window).scrollTop() / $(document).height());
+        }
+    });
+</script>
+
+
+<div class="box_fixRight">
+    <div class="box_content">
+        <a href="https://zalo.me/@ViewBag.Configs.Zalo" target="_blank" class="item item_1">Chat Zalo</a>
+        <a href="https://m.me/legialai98.hitu" target="_blank" class="item item_3">Messenger</a>
+        <a href="tel:@ViewBag.Configs.Phone" class="item item_2" target="_blank">Gọi ngay</a>
+    </div>
+</div>
+<div class="footer__item">
+    <div class="footer__contact">
+        <a href="https://zalo.me/@ViewBag.Configs.Zalo" target="_blank">
+            <img src="~/Public/images/social/logo-zalo.png" alt="">
+            <p>Liên hệ zalo</p>
+        </a>
+    </div>
+    <div class="footer__call">
+        <a href="tel:@ViewBag.Configs.Phone" target="_blank">
+            <i class="fa fa-phone"></i>
+            <p>Gọi ngay</p>
+        </a>
+    </div>
+</div>

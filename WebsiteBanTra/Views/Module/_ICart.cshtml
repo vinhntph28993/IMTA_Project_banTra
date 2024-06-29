@@ -1,0 +1,208 @@
+﻿<script src="~/Public/js/target.min.js"></script>
+@using WebsiteBanTraiCay.Library
+@if (Session["Cart"] == null)
+{
+    @*<div class="container checkout-cart">
+        <img src="~/Public/images/null.png" alt="Giỏ hàng của bạn đang trống" class="d-block m-auto" width="250" />
+        <p class="text-center font-weight-bold" style="opacity: .6;">Giỏ hàng của bạn trống</p>
+        <div class="btn rounded-0 m-auto d-block" style="width:200px; background:#ee4d2d">
+        </div>
+    </div>*@
+    <div class="container empty-cart checkout-cart mt-4">
+        <div class="empty-wrapper">
+            <p>Chưa có sản phẩm nào trong giỏ hàng.</p>
+            <a class="back-shop-link" href="/">
+                MUA NGAY
+            </a>
+        </div>
+
+
+    </div>
+}
+else
+{
+    @*<div class="container checkout-cart">
+            <div class="row">
+                <div class="col-12 my-cart pl-5"><i class="fas fa-carrot text-success pr-2"></i> Giỏ hàng của bạn</div>
+            </div>
+            <div class="row title mt-3 mb-2">
+                <div class="col-5 pl-5">
+                    <input class="form-check-input" type="checkbox" style="position: relative;">
+                    &nbsp;&nbsp; &nbsp;Sản phẩm
+                </div>
+                <div class="col-2 text-center">Đơn giá</div>
+                <div class="col-2 text-center">Số lượng</div>
+                <div class="col-2 text-center">Thành tiền</div>
+                <div class="col-1 text-center">Thao tác</div>
+            </div>
+
+            @{double Tong = 0; int count = 0;}
+            @foreach (var c in (List<ModelCart>)Session["Cart"])
+            {
+                count++;
+                Tong += (c.Price * c.Quantity);
+                <div class="row content border-right border-bottom border-left">
+                    <div class="col-5 pl-5">
+                        <input class="form-check-input" type="checkbox" style="position: relative;">&nbsp;&nbsp; &nbsp;
+                        <a href="~/@c.Slug" class="text-decoration-none text-dark">
+                            <img src="~/Public/images/products/@c.Image" alt=" @c.Name" width="70">
+                            &nbsp; &nbsp; @c.Name
+                        </a>
+                    </div>
+                    <div class="col-2 text-center"> @c.Price.ToString("N0")₫</div>
+                    <div class="col-2 text-center">
+                        <div class="btn rounded-0 dout update" data-id="@c.ProductID" data-options="minus">-</div>
+
+                        <input type="number" class="rounded-0 border etd pl-3 bg-white" style="width:50px; height:34px;margin:-5px;outline:0;border: 0;text-align:center" value="@c.Quantity" min="1" data-id="@c.ProductID">
+
+                        <div class="btn rounded-0 douc update" data-id="@c.ProductID" data-options="add">+</div>
+                    </div>
+
+                    <div class="col-2 text-center" style="color:#ee4d2d">
+                        @((c.Price * c.Quantity).ToString("N0"))₫
+                    </div>
+                    <div class="col-1 text-center">
+                        <a href="#" class="b-remove-one text-decoration-none update" data-id="@c.ProductID" data-options="remove">Xóa</a>
+                    </div>
+                </div>
+            }
+            <div class="my-2">
+                <a href="cart/removeall" class="text-right d-block text-decoration-none" style="font-size:15px">Xóa tất cả</a>
+            </div>
+            <div class="row fb-totalp bg-white container m-auto border fixed-bottom py-3">
+                <div class="col-3 pl-5">
+                    <input class="form-check-input" type="checkbox" style="position: relative;">
+                    &nbsp;&nbsp; &nbsp;Chọn tất cả (@count)
+                </div>
+
+                <div class="col-6 text-center">
+                    <div class="float-right">
+                        Tổng tiền hàng (@count sản phẩm): &nbsp;<strong class="d-inline" style="color:#ee4d2d;font-size: 27px;">@Tong.ToString("N0")₫</strong>
+                    </div>
+                </div>
+                <div class="col-3">
+
+                    <div class="btn text-center rounded-0 text-light">
+                        <a href="#" class="checkAuth text-white text-decoration-none"> Thddssanh toán</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>*@
+    <div class="box-content">
+        <div class="container">
+            <div class="info-cart">
+                <div class="info-product-cart">
+
+                    <table class="table-cart">
+                        <thead class="thead-cart">
+                            <tr>
+                                <th class="thead-cart-product" colspan="3">SẢN PHẨM</th>
+                                <th class="thead-cart-price">GIÁ</th>
+                                <th class="thead-cart-quantity">SỐ LƯỢNG</th>
+                                <th class="thead-cart-total">TỔNG</th>
+                            </tr>
+                        </thead>
+                        @{double Tong = 0; int count = 0;}
+                        @foreach (var c in (List<ModelCart>)Session["Cart"])
+                        {
+                            count++;
+                            Tong += (c.Price * c.Quantity);
+                            <tbody class="tbody-cart">
+
+                                <tr class="info-product-tr">
+
+                                    <td class="product-remove b-remove-one update" data-id="@c.ProductID" data-options="remove">
+                                        <i class="fa-solid fa-x"></i>
+                                    </td>
+                                    <td class="product-img">
+                                        <a href="~/@c.Slug">
+                                            <img src="~/Public/images/products/@c.Image" alt="@c.Name">
+                                        </a>
+                                    </td>
+                                    <td class="product-name">
+                                        <a href="">
+                                            @c.Name
+                                        </a>
+                                    </td>
+                                    <td class="product-price"> @c.Price.ToString("N0")₫</td>
+                                    <td class="product-quantity">
+                                        <div class="button-add">
+                                            <input class="btn-dec update" type="button" data-id="@c.ProductID" data-options="minus" value="-" name="dec" id="dec">
+                                            <input class="input-value" value="@c.Quantity" data-id="@c.ProductID" name="number" id="number">
+                                            <input class="btn-inc update" type="button" data-id="@c.ProductID" data-options="add" value="+" name="inc" id="inc">
+                                        </div>
+                                    </td>
+                                    <td class="product-total-price"> @((c.Price * c.Quantity).ToString("N0"))₫ </td>
+
+                                </tr>
+                            </tbody>
+
+                        }
+
+
+                    </table>
+                    <div class="box-back-total">
+                        <a class="btn-backIndex" href="/">
+                            <button>
+                                <i class="fa-solid fa-arrow-left"></i>
+                                TIẾP TỤC XEM SẢN PHẨM
+                            </button>
+                        </a>
+                        <a href="cart/removeall" class="remove-all   text-decoration-none" style="font-size:15px">
+                            <button>Xóa tất cả</button>
+                        </a>
+                        <span class="total-price">Tổng tiền: @Tong.ToString("N0")₫ </span>
+                    </div>
+
+                </div>
+                <div class="info-product-boder">
+
+                </div>
+                <div class="info-product-buy">
+                    <div class="info-order">
+                        <p class="info-order-title">CỘNG GIỎ HÀNG</p>
+                        <div class="provisional">
+                            <p class="provisional-title">Tạm tính </p>
+                            <p class="provisional-price">@Tong.ToString("N0")₫</p>
+                        </div>
+                        <div class="delivery">
+                            <p class="delivery-title">Giao hàng </p>
+                            <div class="delivery-decs">
+                                <span>Miễn phí giao hàng</span>
+                            </div>
+                        </div>
+                        <div class="total">
+                            <p class="total-title">Tổng </p>
+                            <p class="price">@Tong.ToString("N0")₫</p>
+                        </div>
+                        <div class="check-pay">
+                            <a href="#" class="checkAuth">
+                                <button>
+                                    TIẾN HÀNH THANH TOÁN
+
+                                </button>
+                            </a>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+}
+<script>
+    var inputQuantity = document.querySelector('.input-value')
+
+    inputQuantity.addEventListener('change', function () {
+        if (inputQuantity.value < 1) {
+            alert('Số lượng không được nhỏ hơn 1!')
+            inputQuantity.value = 1
+        }
+    })
+    
+</script>
